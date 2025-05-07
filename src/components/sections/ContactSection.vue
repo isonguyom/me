@@ -1,8 +1,9 @@
 <template>
     <section
-      ref="contactSection"
-      class="h-screen w-full bg-[#0c325b] text-white px-6 py-16 flex flex-col justify-center items-center overflow-hidden"
+      ref="contactSection" id="contact"
+      class="h-screen w-full bg-[#0c325b] text-white px-6 py-16 flex flex-col justify-center items-center overflow-hidden relative"
     >
+      <SectionTitle title="Contact" subtitle="Get in Touch" />
       <div ref="contactContent" class="max-w-3xl w-full text-center space-y-8">
         <h2 class="text-4xl font-bold">Contact Me</h2>
         <p class="text-lg">
@@ -28,6 +29,8 @@
   import { ref, onMounted } from 'vue'
   import { gsap } from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  import SectionTitle from '@/components/SectionTitle.vue'
   
   gsap.registerPlugin(ScrollTrigger)
   

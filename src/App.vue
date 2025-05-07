@@ -1,8 +1,10 @@
 <!-- App.vue -->
 <template>
   <div ref="container">
+    <Navbar />
     <HeroSection />
     <AboutSection />
+    <SkillsSection />
     <ProjectsSection />
     <InsightsSection />
     <ContactSection />
@@ -14,11 +16,13 @@ import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import HeroSection from './components/HeroSection.vue'
-import AboutSection from './components/AboutSection.vue'
-import ProjectsSection from './components/ProjectsSection.vue'
-import InsightsSection from './components/InsightsSection.vue'
-import ContactSection from './components/ContactSection.vue'
+import Navbar from '@/components/Navbar.vue'
+import HeroSection from '@/components/sections/HeroSection.vue'
+import AboutSection from '@/components/sections/AboutSection.vue'
+import SkillsSection from '@/components/sections/SkillsSection.vue'
+import ProjectsSection from '@/components/sections/ProjectsSection.vue'
+import InsightsSection from '@/components/sections/InsightsSection.vue'
+import ContactSection from '@/components/sections/ContactSection.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

@@ -1,6 +1,8 @@
 <template>
-    <section ref="insightsSection"
-        class="h-screen w-full bg-white text-gray-900 px-6 py-16 flex flex-col justify-center items-center overflow-hidden">
+    <section ref="insightsSection" id="insights"
+        class="h-screen w-full bg-white text-gray-900 px-6 py-16 flex flex-col justify-center items-center overflow-hidden relative">
+        <SectionTitle title="Insights" subtitle="What I've Written" />
+        
         <div ref="insightsContent" class="max-w-5xl w-full text-center space-y-10">
             <h2 class="text-4xl font-bold text-[#0c325b]">Insights</h2>
             <div class="grid md:grid-cols-2 gap-6">
@@ -14,6 +16,8 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+import SectionTitle from '@/components/SectionTitle.vue'
 import InsightCard from '@/components/cards/InsightCard.vue'
 
 gsap.registerPlugin(ScrollTrigger)
