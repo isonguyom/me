@@ -1,12 +1,16 @@
 <template>
     <section ref="aboutSection" id="about"
-        class="h-screen relative w-full bg-white text-gray-900 px-6 flex flex-col justify-center items-center overflow-hidden">
+        class="h-screen relative w-full bg-white text-gray-900 px-4 md:px-6 py-10 flex flex-col justify-center items-center">
 
         <SectionTitle title="About Me" subtitle="Who I Am" />
 
-        <div ref="aboutContent" class="max-w-4xl w-full mx-auto h-full items-center py-10">
-            <article
-                class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 w-full h-full flex flex-col justify-center overflow-y-auto">
+        <div ref="aboutContent"
+            class="max-w-4xl w-full mx-auto h-full px-2 overflow-y-auto lg:flex justify-center items-center">
+            <h2
+                class="text-2xl text-center md:text-3xl lg:text-left font-semibold font-heading text-primary mb-6 lg:hidden">
+                About Me
+            </h2>
+            <article class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 w-full">
                 <p class="text-justify text-pretty">
                     I'm <strong>Martin Isonguyo</strong>, a front-end developer with experience in building modern and
                     responsive websites using frameworks like <strong>Vue.js</strong>, <strong>React</strong>, and
@@ -45,20 +49,20 @@ gsap.registerPlugin(ScrollTrigger)
 const aboutSection = ref(null)
 const aboutContent = ref(null)
 
-onMounted(() => {
-    gsap.fromTo(
-        aboutContent.value,
-        { xPercent: 100, opacity: 0 },
-        {
-            xPercent: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: aboutSection.value,
-                start: 'top center',
-            },
-        }
-    )
-})
+//onMounted(() => {
+//    gsap.fromTo(
+//        aboutContent.value,
+//        { xPercent: 100, opacity: 0 },
+//        {
+//            xPercent: 0,
+//            opacity: 1,
+//            duration: 1,
+//            ease: 'power3.out',
+//            scrollTrigger: {
+//                trigger: aboutSection.value,
+//                start: 'top center',
+//            },
+//        }
+//    )
+//})
 </script>

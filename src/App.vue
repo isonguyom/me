@@ -1,6 +1,6 @@
 <!-- App.vue -->
 <template>
-  <div ref="container">
+  <div ref="container" class="w-full">
     <Navbar />
     <HeroSection />
     <AboutSection />
@@ -28,19 +28,19 @@ gsap.registerPlugin(ScrollTrigger)
 
 const container = ref(null)
 
-onMounted(() => {
-  const sections = gsap.utils.toArray(container.value.children)
+// onMounted(() => {
+//   const sections = gsap.utils.toArray(container.value.children)
 
-  gsap.to(sections, {
-    yPercent: -100 * (sections.length - 1),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: container.value,
-      pin: true,
-      scrub: 1,
-      snap: 1 / (sections.length - 1),
-      end: () => "+=" + container.value.offsetHeight,
-    },
-  })
-})
+//   gsap.to(sections, {
+//     yPercent: -100 * (sections.length - 1),
+//     ease: 'none',
+//     scrollTrigger: {
+//       trigger: container.value,
+//       pin: true,
+//       scrub: 1,
+//       snap: 1 / (sections.length - 1),
+//       end: () => "+=" + container.value.offsetHeight,
+//     },
+//   })
+// })
 </script>

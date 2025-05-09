@@ -1,57 +1,83 @@
 <template>
-    <section
-      ref="contactSection" id="contact"
-      class="h-screen w-full bg-[#0c325b] text-white px-6 py-16 flex flex-col justify-center items-center overflow-hidden relative"
-    >
-      <SectionTitle title="Contact" subtitle="Get in Touch" />
-      <div ref="contactContent" class="max-w-3xl w-full text-center space-y-8">
-        <h2 class="text-4xl font-bold">Contact Me</h2>
-        <p class="text-lg">
-          Interested in working together on a maritime-tech or web development project?
-          Let’s build the future of the blue economy together.
+  <section
+    class="h-screen bg-gradient-to-br from-secondary to-secondary/90 text-background flex flex-col justify-center items-center px-3 md:px-6 py-5 relative"
+    id="contact">
+    <SectionTitle title="Contact me" subtitle="Let's talk" />
+    <div class="max-w-xl lg:max-w-full w-full h-full overflow-y-auto px-2 lg:flex justify-between items-center gap-6">
+      <div class="lg:basis-1/2 xl:pr-10">
+        <h2 class="text-2xl text-center md:text-3xl lg:text-left font-semibold font-heading text-primary">Let's Talk
+        </h2>
+        <p class="opacity-80 hidden lg:block mt-6 text-lg xl:text-xl text-pretty">
+          I’m always open to new opportunities and collaborations, especially where tech meets the maritime industry.
+          If you're interested in working together or have a project in mind, don’t hesitate to reach out. Let’s create
+          something amazing!
         </p>
-        <form class="grid gap-4 text-left">
-          <input type="text" placeholder="Name" class="px-4 py-2 w-full rounded bg-white text-gray-900" />
-          <input type="email" placeholder="Email" class="px-4 py-2 w-full rounded bg-white text-gray-900" />
-          <textarea placeholder="Message" rows="4" class="px-4 py-2 w-full rounded bg-white text-gray-900"></textarea>
-          <button
-            type="submit"
-            class="bg-white text-[#0c325b] px-6 py-2 font-semibold rounded hover:bg-gray-200 transition"
-          >
-            Send Message
-          </button>
-        </form>
       </div>
-    </section>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  import { gsap } from 'gsap'
-  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+      <form @submit.prevent="sendEmail" class="space-y-3 w-full lg:basis-1/2">
+        <InputField v-model="form.name" label="Your Name" placeholder="Enter your name" id="name" />
+        <InputField v-model="form.email" type="email" label="Your Email" placeholder="Enter your email" id="email" />
+        <TextareaField v-model="form.message" label="Your Message" placeholder="Write your message here..."
+          id="message" />
 
-  import SectionTitle from '@/components/SectionTitle.vue'
-  
-  gsap.registerPlugin(ScrollTrigger)
-  
-  const contactSection = ref(null)
-  const contactContent = ref(null)
-  
-  onMounted(() => {
-    gsap.fromTo(
-      contactContent.value,
-      { xPercent: -100, opacity: 0 },
+        <Toast ref="toastRef" />
+        <div class="ml-auto w-fit">
+          <BaseButton variant="primary" type="submit" :disabled="isSending">{{ isSending ? 'Sending...' : 'Send Message'
+          }}</BaseButton>
+
+        </div>
+        <!-- <BaseButton variant="outline">Contact</BaseButton>
+<BaseButton variant="ghost">Learn More</BaseButton> -->
+      </form>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import emailjs from '@emailjs/browser'
+
+import SectionTitle from '@/components/SectionTitle.vue'
+import InputField from '@/components/utilities/InputField.vue'
+import TextareaField from '@/components/utilities/TextareaField.vue'
+import BaseButton from '@/components/utilities/BaseButton.vue'
+import Toast from '@/components/utilities/Toast.vue'
+
+const form = ref({
+  name: '',
+  email: '',
+  message: ''
+})
+
+const isSending = ref(false)
+
+const toastRef = ref(null)
+
+const sendEmail = async () => {
+  isSending.value = true
+  try {
+    const result = await emailjs.send(
+      import.meta.env.VITE_SERVICE_ID,
+      import.meta.env.VITE_TEMPLATE_ID,
       {
-        xPercent: 0,
-        opacity: 1,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: contactSection.value,
-          start: 'top center',
-        },
-      }
+        from_name: form.value.name,
+        from_email: form.value.email,
+        message: form.value.message
+      },
+      import.meta.env.VITE_USER_ID
     )
-  })
-  </script>
-  
+    toastRef.value.addToast({
+      message: 'Message sent successfully!',
+      type: 'success',
+    })
+    form.value = { name: '', email: '', message: '' }
+  } catch (error) {
+    console.error('EmailJS Error:', error)
+    toastRef.value.addToast({
+      message: 'Something went wrong. Please try again.',
+      type: 'error',
+    })
+  } finally {
+    isSending.value = false
+  }
+}
+</script>
