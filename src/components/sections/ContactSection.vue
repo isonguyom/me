@@ -3,11 +3,13 @@
     class="h-screen bg-gradient-to-br from-secondary to-secondary/90 text-background flex flex-col justify-center items-center px-3 md:px-6 py-5 relative"
     id="contact">
     <SectionTitle title="Contact me" subtitle="Let's talk" />
-    <div class="max-w-xl lg:max-w-full w-full h-full overflow-y-auto px-2 lg:flex justify-between items-center gap-6">
+    <div
+      class="max-w-xl lg:max-w-full w-full h-full overflow-y-auto px-2 flex flex-col lg:flex-row justify-between items-center gap-6">
       <div class="lg:basis-1/2 xl:pr-10">
-        <h2 class="text-2xl text-center md:text-3xl lg:text-left font-semibold font-heading text-primary">Let's Talk
+        <h2 class="text-2xl text-center md:text-3xl lg:text-left font-semibold font-heading text-primary mb-4">Let's
+          Talk
         </h2>
-        <p class="opacity-80 hidden lg:block mt-6 text-lg xl:text-xl text-pretty">
+        <p class="opacity-80 hidden lg:block text-lg xl:text-xl text-pretty">
           I’m always open to new opportunities and collaborations, especially where tech meets the maritime industry.
           If you're interested in working together or have a project in mind, don’t hesitate to reach out. Let’s create
           something amazing!
@@ -25,8 +27,6 @@
           }}</BaseButton>
 
         </div>
-        <!-- <BaseButton variant="outline">Contact</BaseButton>
-<BaseButton variant="ghost">Learn More</BaseButton> -->
       </form>
     </div>
   </section>

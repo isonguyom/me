@@ -6,7 +6,7 @@
     <AboutSection />
     <SkillsSection />
     <ProjectsSection />
-    <InsightsSection />
+    <ArticlesSection />
     <ContactSection />
   </div>
 </template>
@@ -21,7 +21,7 @@ import HeroSection from '@/components/sections/HeroSection.vue'
 import AboutSection from '@/components/sections/AboutSection.vue'
 import SkillsSection from '@/components/sections/SkillsSection.vue'
 import ProjectsSection from '@/components/sections/ProjectsSection.vue'
-import InsightsSection from '@/components/sections/InsightsSection.vue'
+import ArticlesSection from '@/components/sections/ArticlesSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 
 gsap.registerPlugin(ScrollTrigger)

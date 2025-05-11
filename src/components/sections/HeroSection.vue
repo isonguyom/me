@@ -1,9 +1,9 @@
 <template>
     <section ref="heroSection" id="home"
         class="h-screen w-full bg-secondary text-white flex flex-col justify-center items-center px-4 md:px-6 py-10 text-center relative">
-        <div class="absolute inset-0 bg-cover bg-center opacity-30"
+        <!-- <div class="absolute inset-0 bg-cover bg-center opacity-30"
             style="background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fG1hcml0aW1lfGVufDB8fHx8MTY5MjQ3NTYyNw&ixlib=rb-4.0.3&q=80&w=1080');">
-        </div>
+        </div> -->
         <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
             preserveAspectRatio="xMidYMid slice">
             <defs>

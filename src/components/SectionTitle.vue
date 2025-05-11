@@ -1,6 +1,6 @@
 <template>
     <div
-        class="hidden lg:block absolute top-0 left-0 bg-primary text-secondary py-4 px-6 rounded-e-full rounded-b-full shadow-md hover:scale-105 transition-transform duration-300 ease-in-out">
+        class="hidden lg:block absolute top-0 left-0 bg-primary text-secondary py-4 px-6 rounded-e-full rounded-b-full shadow-md hover:scale-105 transition-transform duration-300 ease-in-out z-10">
         <h2 class="font-bold text-lg capitalize">{{ title }}</h2>
         <p v-if="subtitle" class="opacity-80 font-script">{{ subtitle }}</p>
     </div>
