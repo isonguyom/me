@@ -1,9 +1,7 @@
 <template>
     <section ref="heroSection" id="home"
-        class="h-screen w-full bg-secondary text-white flex flex-col justify-center items-center px-4 md:px-6 py-10 text-center relative">
-        <!-- <div class="absolute inset-0 bg-cover bg-center opacity-30"
-            style="background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fG1hcml0aW1lfGVufDB8fHx8MTY5MjQ3NTYyNw&ixlib=rb-4.0.3&q=80&w=1080');">
-        </div> -->
+        class="h-screen w-full bg-secondary flex flex-col justify-center items-center px-4 md:px-6 py-10 relative">
+        
         <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
             preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -14,26 +12,27 @@
             <rect width="100%" height="100%" fill="url(#circle-pattern)" />
         </svg>
 
-        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary/90 opacity-50"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary/10 opacity-50"></div>
 
-        <div ref="heroContent" class="max-w-4xl px-6 z-10">
-            <h1 class="text-4xl md:text-6xl font-bold uppercase mb-6">
-                Hi, I'm <span class="text-primary">Martin Isonguyo</span>
+        <div ref="heroContent" class="w-full z-10">
+            <h1 class="font-bold uppercase md:text-xl lg:2xl">
+                Hi, I'm <br /> <span class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl">Martin
+                    Isonguyo</span>
             </h1>
-            <p class="text-lg md:text-xl text-background mb-8 max-w-3xl mx-auto">
-                A proficient <span class="font-medium capitalize">Web Developer</span> building modern, responsive web
+            <p class="md:text-xl lg:text-2xl mb-6 max-w-xl lg:max-w-3xl">
+                A proficient <span class="font-semibold capitalize">Frontend Developer</span> building modern,
+                responsive web
                 applications and crafting efficient digital solutions for the maritime industry. </p>
 
-            <div class="flex flex-wrap justify-center items-center gap-4">
+            <div class="flex flex-wrap gap-4">
                 <BaseButton variant="primary" @click="navigateTo('#projects')">
                     View My Works
                 </BaseButton>
 
-
-
                 <BaseButton variant="outline" @click="navigateTo('#contact')">Contact Me</BaseButton>
             </div>
         </div>
+        <Navbar />
     </section>
 </template>
 
@@ -43,6 +42,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import BaseButton from '@/components/utilities/BaseButton.vue'
+import Navbar from '@/components/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

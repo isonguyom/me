@@ -2,6 +2,9 @@
     <section ref="aboutSection" id="about"
         class="h-screen relative w-full bg-white text-gray-900 px-4 md:px-6 py-10 flex flex-col justify-center items-center">
 
+        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary/10 opacity-50"></div>
+
+        <Navbar />
         <SectionTitle title="About Me" subtitle="Who I Am" />
 
         <div ref="aboutContent"
@@ -43,6 +46,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import SectionTitle from '@/components/SectionTitle.vue'
+import Navbar from '@/components/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

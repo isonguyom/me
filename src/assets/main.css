@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Dancing+Script:wght@400..700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Petit+Formal+Script&family=Space+Grotesk:wght@300..700&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #FBBF24;
-  --color-secondary: #1E1B4B;
-  --color-accent: #4C1D95;
-  --color-background: #F9FAFB;
-  --color-text: #1E293B;
+  --color-primary: #47294c;
+  --color-primary-light: #7b4f7a;
+  --color-secondary: #c3b9b7;
+  --color-accent: #687a89;
+  --color-background: #faf4fc;
+  --color-text: #333333;
 
   --font-text: 'DM Sans', sans-serif;
-  --font-heading: 'Fraunces', serif;
+  --font-heading: 'Space Grotesk', sans-serif;
   --font-mono: 'DM Mono', monospace;
-  --font-script: 'Dancing Script', cursive;
+  --font-script: 'Petit Formal Script', cursive;
 }
 
 *,
