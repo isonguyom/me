@@ -1,8 +1,15 @@
 <template>
     <section ref="heroSection" id="home"
-        class="h-screen w-full bg-secondary flex flex-col justify-center items-center px-4 md:px-6 py-10 relative">
-        
-        <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
+        class="h-screen w-full bg-secondary flex flex-col justify-center items-center px-4 md:px-6 py-10 relative bg-pattern">
+
+        <!-- Background Image container -->
+         <div class="absolute inset-0 bg-cover bg-center opacity-5 pointer-events-none -z-10"
+            style="background-image: url('assets/hero-bg.png')">
+        </div>
+
+       <!-- Subtle Transparent Pattern Background -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+     <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
             preserveAspectRatio="xMidYMid slice">
             <defs>
                 <pattern id="circle-pattern" patternUnits="userSpaceOnUse" width="10" height="10">
@@ -11,10 +18,11 @@
             </defs>
             <rect width="100%" height="100%" fill="url(#circle-pattern)" />
         </svg>
+    </div>
 
-        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary/10 opacity-50"></div>
+        <div class="absolute inset-0 bg-black/10"></div>
 
-        <div ref="heroContent" class="w-full z-10">
+        <div ref="heroContent" class="relative z-10 w-full">
             <h1 class="font-bold uppercase md:text-xl lg:2xl">
                 Hi, I'm <br /> <span class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl">Martin
                     Isonguyo</span>
@@ -94,3 +102,14 @@ const navigateTo = (section) => {
 //     })
 // })
 </script>
+
+<style scoped>
+.bg-pattern {
+    background-image: url('@/assets/hero-bg.png');
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: center;
+    background-blend-mode: overlay;
+    opacity: 1;
+}
+</style>

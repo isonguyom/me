@@ -5,7 +5,7 @@
   ]">
     <!-- Project Image -->
     <div
-      class="w-full md:w-2/3 lg:w-1/2 h-40 sm:h-50 lg:h-auto overflow-hidden rounded-full shadow-lg border border-white/10 mx-auto relative">
+      class="w-full md:w-2/3 lg:w-1/2 h-40 sm:h-50 lg:h-auto overflow-hidden rounded-full shadow-lg border border-white/5 mx-auto relative">
       <img :src="project.image" :alt="`Preview of ${project.title}`" class="w-full h-full object-cover object-center"
         loading="lazy" />
       <div class="absolute inset-0 bg-black/50"></div>
@@ -13,18 +13,18 @@
 
     <!-- Project Content -->
     <div class="p-4 space-y-2 lg:space-y-4 text-center w-full md:w-2/3 lg:w-1/2 lg:text-left mx-auto">
-      <h3 class="text-xl md:text-3xl lg:text-5xl font-bold text-primary capitalize">
+      <h3 class="text-xl md:text-3xl lg:text-5xl font-bold text-primary uppercase">
         {{ project.title }}
       </h3>
 
-      <p class="text-sm md:text-base lg:text-xl lg:pr-6 text-pretty">
+      <p class="text-sm md:text-base lg:text-xl lg:pr-6 text-pretty opacity-80">
         {{ project.description }}
       </p>
 
       <!-- Badges -->
       <div v-if="project.tags?.length" class="flex flex-wrap justify-center lg:justify-start gap-2">
         <span v-for="(tag, index) in project.tags" :key="index"
-          class="bg-accent text-background text-xs font-medium px-3 py-1 rounded-full capitalize">
+          class="bg-secondary text-primary text-xs lg:text-sm font-medium px-3 py-1 rounded-full capitalize">
           {{ tag }}
         </span>
       </div>

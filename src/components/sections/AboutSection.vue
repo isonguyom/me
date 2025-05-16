@@ -2,7 +2,11 @@
     <section ref="aboutSection" id="about"
         class="h-screen relative w-full bg-white text-gray-900 px-4 md:px-6 py-10 flex flex-col justify-center items-center">
 
-        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-secondary/10 opacity-50"></div>
+        <!-- Background Image container -->
+        <!-- <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
+            style="background-image: url('assets/about-bg.png')"></div> -->
+
+        <div class="absolute inset-0 bg-primary/20"></div>
 
         <Navbar />
         <SectionTitle title="About Me" subtitle="Who I Am" />
@@ -10,7 +14,7 @@
         <div ref="aboutContent"
             class="max-w-4xl w-full mx-auto h-full px-2 overflow-y-auto lg:flex justify-center items-center">
             <h2
-                class="text-2xl text-center md:text-3xl lg:text-left font-semibold font-heading text-primary mb-6 lg:hidden">
+                class="lg:hidden text-lg text-center md:text-xl lg:text-left font-semibold font-heading text-primary mb-4">
                 About Me
             </h2>
             <article class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 w-full">
@@ -24,7 +28,8 @@
 
                 <p class="text-justify text-pretty">
                     With a background in marine engineering, I’m especially interested in driving <strong>digital
-                        transformation in the maritime sector</strong> — using smart, efficient solutions to bridge the
+                        transformation in the maritime industry</strong> — using smart, efficient solutions to bridge
+                    the
                     gap
                     between industry and innovation.
                 </p>

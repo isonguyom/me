@@ -7,7 +7,7 @@
     <div
       class="max-w-xl lg:max-w-full w-full h-full overflow-y-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-6">
       <div class="lg:basis-1/2">
-        <h2 class="lg:hidden text-2xl text-center lg:text-left font-semibold font-heading text-white mb-4">Let's
+        <h2 class="lg:hidden text-lg text-center md:text-xl lg:text-left font-semibold font-heading text-secondary mb-4">Let's
           Talk
         </h2>
         <div class="hidden lg:flex flex-col text-center text-7xl text-secondary font-bold font-heading">

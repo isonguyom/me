@@ -73,7 +73,7 @@ onMounted(() => {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #4C1D95;
+  background-color: var(--color-accent);
   border-radius: 6px;
 }
 
