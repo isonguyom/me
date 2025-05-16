@@ -4,7 +4,7 @@
 
     <!-- Background Image container -->
     <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
-      style="background-image: url('assets/projects-bg.png')"></div>
+      style="background-image: url('./assets/projects-bg.png')"></div>
     <div class="absolute inset-0 bg-black/20"></div>
 
     <Navbar darkBg />

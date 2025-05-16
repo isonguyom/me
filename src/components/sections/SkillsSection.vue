@@ -5,7 +5,7 @@
 
 
     <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
-      style="background-image: url('assets/skills-bg.png')"></div>
+      style="background-image: url('./assets/skills-bg.png')"></div>
     <div class="absolute inset-0 bg-white/20"></div>
 
     <Navbar />
@@ -81,7 +81,7 @@ const skills = [
 <style scoped>
 .swiper-button-next,
 .swiper-button-prev {
-  color: var(--color-accent);
+  color: red !important;
 }
 
 .swiper-pagination-bullet-active {

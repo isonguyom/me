@@ -104,12 +104,5 @@ const navigateTo = (section) => {
 </script>
 
 <style scoped>
-.bg-pattern {
-    background-image: url('@/assets/hero-bg.png');
-    background-repeat: repeat;
-    background-size: auto;
-    background-position: center;
-    background-blend-mode: overlay;
-    opacity: 1;
-}
+
 </style>
