@@ -2,10 +2,8 @@
   <section id="skills"
     class="h-screen w-full px-4 md:px-6 flex flex-col justify-center items-center overflow-hidden relative">
 
-
-
     <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
-      style="background-image: url('./assets/skills-bg.png')"></div>
+      style="background-image: url('assets/skills-bg.png')"></div>
     <div class="absolute inset-0 bg-white/20"></div>
 
     <Navbar />
@@ -16,7 +14,8 @@
         My Skills
       </h2>
       <Swiper :modules="[Navigation, Pagination, Autoplay]" :slides-per-view="1" :space-between="30" :loop="true"
-        :autoplay="{ delay: 5000, disableOnInteraction: false }" navigation pagination :breakpoints="{
+        :autoplay="{ delay: 5000, disableOnInteraction: false }" navigation :pagination="{ clickable: true }"
+        :breakpoints="{
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }" class="w-full">
@@ -79,12 +78,45 @@ const skills = [
 </script>
 
 <style scoped>
-.swiper-button-next,
-.swiper-button-prev {
-  color: red !important;
+/* Pagination Bullets */
+::v-deep(.swiper-pagination-bullet) {
+  background-color: #bbb;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 1;
+  transition: background-color 0.3s ease;
 }
 
-.swiper-pagination-bullet-active {
-  background: var(--color-primary);
+::v-deep(.swiper-pagination-bullet-active) {
+  background-color: var(--color-accent);
+  /* Purple */
+  transform: scale(1.2);
+}
+
+/* Navigation Buttons */
+::v-deep(.swiper-button-next),
+::v-deep(.swiper-button-prev) {
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.226);
+  border-radius: 9999px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+::v-deep(.swiper-button-next:hover),
+::v-deep(.swiper-button-prev:hover) {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
+}
+
+::v-deep(.swiper-button-next::after),
+::v-deep(.swiper-button-prev::after) {
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>
