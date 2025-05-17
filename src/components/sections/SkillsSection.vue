@@ -62,7 +62,7 @@ const skills = [
     skills: ['Figma', 'Corel Draw', 'Inkscape', 'Logo Design'],
   },
   {
-    category: 'Domain Focus/Interests',
+    category: 'Focus/Interests',
     skills: [
       'Maritime Digitalization',
       'Marine Engineering',

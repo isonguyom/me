@@ -16,13 +16,17 @@
         My Projects
       </h2>
 
-      <div class="custom-nav-buttons pointer-events-none absolute top-1/2 left-0 right-0 flex justify-between px-4 z-10">
-  <button class="custom-prev text-white cursor-pointer text-2xl font-bold flex items-center justify-center bg-white/10 enabled:hover:bg-white/50 enabled:hover:scale-[1.05] disabled:opacity-30 disabled:cursor-not-allowed px-4">&larr;</button>
-  <button class="custom-next text-white cursor-pointer text-2xl font-bold flex items-center justify-center bg-white/10 enabled:hover:bg-white/50 enabled:hover:scale-[1.05] disabled:opacity-30 disabled:cursor-not-allowed px-4">&rarr;</button>
-</div>
+      <div
+        class="custom-nav-buttons pointer-events-none absolute top-1/2 left-0 right-0 flex justify-between px-4 z-10">
+        <button
+          class="custom-prev text-white cursor-pointer text-2xl font-bold flex items-center justify-center bg-white/10 enabled:hover:bg-white/50 enabled:hover:scale-[1.05] disabled:opacity-30 disabled:cursor-not-allowed px-4">&larr;</button>
+        <button
+          class="custom-next text-white cursor-pointer text-2xl font-bold flex items-center justify-center bg-white/10 enabled:hover:bg-white/50 enabled:hover:scale-[1.05] disabled:opacity-30 disabled:cursor-not-allowed px-4">&rarr;</button>
+      </div>
 
       <Swiper ref="projectsContent" :modules="[Navigation, Pagination]" :slides-per-view="1" :space-between="30"
-        :navigation="{ nextEl: '.custom-next', prevEl: '.custom-prev' }" :pagination="{ clickable: true }" class="w-full">
+        :navigation="{ nextEl: '.custom-next', prevEl: '.custom-prev' }" :pagination="{ clickable: true }"
+        class="w-full">
         <SwiperSlide v-for="(project, index) in projects" :key="project.id">
           <ProjectCard :project="project" :isEven="index % 2 === 1" />
         </SwiperSlide>
@@ -96,8 +100,8 @@ const projectsContent = ref(null)
 
 .custom-prev,
 .custom-next {
-  pointer-events: all; /* Enable clicking */
+  pointer-events: all;
+  /* Enable clicking */
   transition: all 0.3s ease;
 }
 </style>
-

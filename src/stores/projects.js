@@ -69,23 +69,6 @@ export const useProjectsStore = defineStore("projects", () => {
       tags: ['web dev'],
       description: "A simple JavaScript quiz app that allows users to test their knowledge on various topics. This is a practice project.",
     },
-    {
-      id: id++,
-      title: "Dummy Me",
-      image: "assets/dummyme.png",
-      link: "https://isonguyom.github.io/dummyMe",
-      tags: ['web dev'],
-      description: "This handy tool helps you create dummy text for all your layout needs. This is a practice project.",
-    },
-    {
-      id: id++,
-      title: "Vue Countdown Timer",
-      image: "assets/countdown-timer.png",
-      link: "https://isonguyom.github.io/countdown-timer",
-      tags: ['web dev'],
-      description: "A simple countdown timer built with Vue.js. This is a practice project.",
-    },
-
   ]);
   return { projects };
 });

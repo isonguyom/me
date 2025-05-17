@@ -3,8 +3,8 @@
         class="h-screen w-full bg-secondary flex flex-col justify-center items-center px-4 md:px-6 py-10 relative bg-pattern">
 
         <!-- Background Image container -->
-         <div class="absolute inset-0 bg-cover bg-center opacity-5 pointer-events-none -z-10"
-            style="background-image: url('assets/hero-bg.png')">
+         <div class="absolute inset-0 bg-cover bg-center opacity-3 pointer-events-none -z-10"
+            style="background-image: url('assets/hero-bg.svg')">
         </div>
 
        <!-- Subtle Transparent Pattern Background -->
