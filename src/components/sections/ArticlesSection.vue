@@ -1,6 +1,6 @@
 <template>
-  <section ref="articlesSection" id="articles"
-    class="h-screen w-full bg-white text-gray-900 px-4 md:px-6 flex flex-col justify-center items-center overflow-hidden relative">
+  <div ref="articlesSection" id="articles"
+    class="h-full w-full bg-background flex justify-center items-center px-4 md:px-6 py-10 relative">
 
     <Navbar />
     <SectionTitle title="Articles" subtitle="What I've Written" />
@@ -26,7 +26,7 @@
         </SwiperSlide>
       </Swiper>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>

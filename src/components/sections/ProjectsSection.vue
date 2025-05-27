@@ -1,9 +1,9 @@
 <template>
-  <section ref="projectsSection" id="projects"
-    class="h-screen w-full bg-black text-background px-4 md:px-6 flex flex-col justify-center items-center overflow-hidden relative">
+  <div ref="projectsSection" id="projects"
+    class="h-full w-full flex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always text-white">
 
     <!-- Background Image container -->
-    <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
+    <div class="absolute inset-0 bg-cover bg-center pointer-events-none"
       style="background-image: url('./assets/projects-bg.png')"></div>
     <div class="absolute inset-0 bg-black/20"></div>
 
@@ -34,7 +34,7 @@
 
 
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>

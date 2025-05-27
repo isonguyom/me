@@ -1,13 +1,15 @@
 <template>
-    <header class="fixed top-0 right-0 w-full bg-transparent z-50">
-        <div class="flex justify-end items-center w-full mx-auto">
+    <header class="fixed top-0 right-0 w-full bg-transparent z-50 pointer-events-none">
+        <div class="flex justify-between items-center w-full p-4">
             <!-- Logo or branding section -->
-            <!-- <div class="text-white text-xl font-bold">YourLogo</div> -->
+            <div class="flex items-center gap-2">
+                <span class="logo font-script font-bold text-2xl md:text-3xl text-transparent underline">M</span>
+                <h4 class="font-light text-xl text-black capitalize tracking-wider">{{ sectionTitle }}</h4>
+            </div>
 
-            <!-- Hamburger Icon -->
-            <div class="relative">
-                <div @click="toggleMenu"
-                    class="cursor-pointer flex items-center justify-center z-50 w-12 h-12 lg:w-16 lg:h-16 rounded-full rounded-t-none"
+            <div class="relative border pointer-events-auto">
+                <!-- Hamburger Icon -->
+                <button @click="toggleMenu" class="cursor-pointer flex items-center justify-center"
                     :class="{ 'bg-accent': isMenuOpen, 'bg-transparent': !isMenuOpen }">
                     <svg v-if="!isMenuOpen" xmlns="http://www.w3.org/2000/svg"
                         :class="['h-6 w-6', darkBg ? 'text-secondary' : 'text-primary']" fill="none" viewBox="0 0 24 24"
@@ -20,7 +22,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                </div>
+                </button>
 
                 <!-- Navigation Links -->
                 <nav :class="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }"
@@ -44,6 +46,10 @@ defineProps({
         type: Boolean,
         default: false,
     },
+    sectionTitle: {
+        type: String,
+        default: 'Section'
+    }
 })
 
 const isMenuOpen = ref(false)
@@ -64,4 +70,8 @@ const navigateTo = (section) => {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+.logo {
+    -webkit-text-stroke: 2px var(--color-primary);
+}
+</style>

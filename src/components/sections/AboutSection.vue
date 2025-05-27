@@ -1,6 +1,6 @@
 <template>
-    <section ref="aboutSection" id="about"
-        class="h-screen relative w-full bg-white text-gray-900 px-4 md:px-6 py-10 flex flex-col justify-center items-center">
+    <div ref="aboutSection" id="about"
+        class="h-full w-full flex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always">
 
         <!-- Background Image container -->
         <!-- <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
@@ -42,7 +42,7 @@
             </article>
 
         </div>
-    </section>
+    </div>
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
-  <section id="skills"
-    class="h-screen w-full px-4 md:px-6 flex flex-col justify-center items-center overflow-hidden relative">
+  <div id="skills"
+    class="h-full w-full lex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always">
 
     <div class="absolute inset-0 bg-cover bg-center pointer-events-none -z-10"
       style="background-image: url('assets/skills-bg.png')"></div>
@@ -32,7 +32,7 @@
         </SwiperSlide>
       </Swiper>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
-  <section
-    class="h-screen bg-gradient-to-br from-primary to-primary/90 text-background flex flex-col justify-center items-center px-4 md:px-6 py-5 relative"
+  <div
+    class="h-full w-full bg-secondary flex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always bg-gradient-to-br from-primary to-primary/90 text-background"
     id="contact">
     <SectionTitle title="Contact me" subtitle="Let's talk" />
     <Navbar darkBg />
@@ -34,7 +34,7 @@
         </div>
       </form>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>

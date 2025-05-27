@@ -1,24 +1,24 @@
 <template>
-    <section ref="heroSection" id="home"
-        class="h-screen w-full bg-secondary flex flex-col justify-center items-center px-4 md:px-6 py-10 relative bg-pattern">
+    <div ref="heroSection" id="home"
+        class="h-full w-full bg-secondary flex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always">
 
         <!-- Background Image container -->
-         <div class="absolute inset-0 bg-cover bg-center opacity-3 pointer-events-none -z-10"
+        <div class="absolute inset-0 bg-cover bg-center opacity-3 pointer-events-none"
             style="background-image: url('assets/hero-bg.svg')">
         </div>
 
-       <!-- Subtle Transparent Pattern Background -->
-    <div class="absolute inset-0 z-0 pointer-events-none">
-     <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
-            preserveAspectRatio="xMidYMid slice">
-            <defs>
-                <pattern id="circle-pattern" patternUnits="userSpaceOnUse" width="10" height="10">
-                    <circle cx="2" cy="2" r="2" fill="rgba(255, 255, 255, 0.2)" />
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#circle-pattern)" />
-        </svg>
-    </div>
+        <!-- Subtle Transparent Pattern Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
+                preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="circle-pattern" patternUnits="userSpaceOnUse" width="10" height="10">
+                        <circle cx="2" cy="2" r="2" fill="rgba(255, 255, 255, 0.2)" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#circle-pattern)" />
+            </svg>
+        </div>
 
         <div class="absolute inset-0 bg-black/10"></div>
 
@@ -40,8 +40,8 @@
                 <BaseButton variant="outline" @click="navigateTo('#contact')">Contact Me</BaseButton>
             </div>
         </div>
-        <Navbar />
-    </section>
+        <!-- <Navbar /> -->
+    </div>
 </template>
 
 <script setup>
@@ -103,6 +103,4 @@ const navigateTo = (section) => {
 // })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
