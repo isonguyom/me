@@ -1,86 +1,36 @@
 <template>
-  <main ref="container" class="w-[100vw] h-screen overflow-hidden relative">
-    <!-- Navbar -->
-    <Navbar :section-title="sectionTitle" />
+  <main id="mainWrapper" ref="container" class="w-[100vw] h-screen overflow-hidden relative">
+    <Navbar 
+      :currentIndex="current"
+      @go-to="goToSection" 
+      @toggle-nav="isNavActive = $event" 
+    />
+    <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" />
 
-    <!-- Side indicator -->
-    <nav class="side-indicator">
-      <button v-for="(section, index) in sectionsCount" :key="index" :class="{ active: current === index }"
-        @click="goToSection(index)" :aria-label="`Go to section ${index + 1}`"></button>
-    </nav>
-
-    <SideIndicator :sectionsCount="sectionsCount" :current="current" @go-to="goToSection" />
-
-    <section class="hero" id="home">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg one">
-            <HeroSection />
+    <template v-for="(Component, index) in sectionsList" :key="index">
+      <section :class="[Component.class, current === index ? 'active' : '']" :id="Component.id">
+        <div class="outer">
+          <div class="inner">
+            <div class="bg">
+              <component :is="Component.component" :key="Component.id" @go-to="goToSection" />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </template>
 
-    <section class="about" id="about">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <AboutSection />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="skills" id="skills">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <SkillsSection />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="projects" id="projects">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <ProjectsSection />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="articles" id="articles">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <ArticlesSection />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="outer">
-        <div class="inner">
-          <div class="bg">
-            <ContactSection />
-          </div>
-        </div>
-      </div>
-    </section>
     <Footer :index="current" :total="sectionsCount" @go-to="goToSection" />
   </main>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import SideIndicator from '@/components/SideIndicator.vue'
+
 import HeroSection from '@/components/sections/HeroSection.vue'
 import AboutSection from '@/components/sections/AboutSection.vue'
 import SkillsSection from '@/components/sections/SkillsSection.vue'
@@ -89,192 +39,199 @@ import ArticlesSection from '@/components/sections/ArticlesSection.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
 
 const container = ref(null)
-const current = ref(undefined)
+const current = ref(0)
 const next = ref(0)
-const listening = ref(false)
+const initialLoad = ref(true)
 
-const sectionsCount = 6 // total sections, adjust if needed
-// Default section title, can be dynamic if needed
+const direction = ref('right')
+const listening = ref(false)
+const isNavActive = ref(false)   // <--- NEW: flag for nav menu active state
 
 const sections = ref([])
 const images = ref([])
 const outerWrappers = ref([])
 const innerWrappers = ref([])
-const direction = ref('right') // Default direction for initial slide
 
-const touch = {
-  startX: 0,
-  startY: 0,
-  dx: 0,
-  dy: 0,
-  startTime: 0,
-  dt: 0
-}
 
-const tlDefaults = {
-  ease: 'slow.inOut',
-  duration: 1.25
-}
+const sectionsList = [
+  { id: 'home', class: 'hero bg-secondary', component: HeroSection },
+  { id: 'aboutMe', class: 'about', component: AboutSection },
+  { id: 'mySkills', class: 'skills', component: SkillsSection },
+  { id: 'myProjects', class: 'projects', component: ProjectsSection },
+  { id: 'myArticles', class: 'articles', component: ArticlesSection },
+  { id: 'contactMe', class: 'contact', component: ContactSection },
+]
 
-// Computed property to get the current section index
-const sectionTitle = computed(() => {
-  if (current.value === undefined) return 'Home'
-  switch (current.value) {
-    case 0: return 'Home'
-    case 1: return 'About'
-    case 2: return 'Skills'
-    case 3: return 'Projects'
-    case 4: return 'Articles'
-    case 5: return 'Contact'
-    default: return 'Home'
+const sectionsCount = sectionsList.length
+
+const tlDefaults = { ease: 'slow.inOut', duration: 1.25 }
+
+function animateSlideIn() {
+  if (!initialLoad.value) {
+    gsap.set(sections.value[current.value], {
+      zIndex: 0,
+      pointerEvents: 'none',
+    })
   }
-})
 
+  gsap.set(sections.value[next.value], {
+    autoAlpha: 1,
+    zIndex: 1,
+    pointerEvents: 'auto',
+  })
 
-function slideIn() {
-  if (current.value !== undefined) gsap.set(sections.value[current.value], { zIndex: 0 })
-
-  gsap.set(sections.value[next.value], { autoAlpha: 1, zIndex: 1 })
   gsap.set(images.value[next.value], { xPercent: 0 })
 
-  const tl = gsap
-    .timeline({
-      paused: true,
-      defaults: tlDefaults,
-      onComplete: () => {
-        listening.value = true
-        current.value = next.value
-      }
-    })
-    .to([outerWrappers.value[next.value], innerWrappers.value[next.value]], { xPercent: 0 }, 0)
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: tlDefaults,
+    onComplete: () => {
+      current.value = next.value
+      updateHash(current.value) // ✅ Add this
+      listening.value = true
+      initialLoad.value = false
+    },
+  })
+
+  tl.to([outerWrappers.value[next.value], innerWrappers.value[next.value]], { xPercent: 0 }, 0)
     .from(images.value[next.value], { xPercent: 15 }, 0)
 
-  if (current.value !== undefined) {
-    tl.add(
-      gsap.to(images.value[current.value], {
-        xPercent: -15,
-        ...tlDefaults
-      }),
-      0
-    ).add(
-      gsap
-        .timeline()
-        .set(outerWrappers.value[current.value], { xPercent: 100 })
-        .set(innerWrappers.value[current.value], { xPercent: -100 })
-        .set(images.value[current.value], { xPercent: 0 })
-        .set(sections.value[current.value], { autoAlpha: 0 })
-    )
+  if (!initialLoad.value) {
+    tl.to(images.value[current.value], { xPercent: -15 }, 0)
+      .set(outerWrappers.value[current.value], { xPercent: 100 })
+      .set(innerWrappers.value[current.value], { xPercent: -100 })
+      .set(images.value[current.value], { xPercent: 0 })
+      .set(sections.value[current.value], {
+        autoAlpha: 0,
+        pointerEvents: 'none',
+      })
   }
 
   tl.play(0)
 }
 
-function slideOut() {
-  gsap.set(sections.value[current.value], { zIndex: 1 })
-  gsap.set(sections.value[next.value], { autoAlpha: 1, zIndex: 0 })
+
+function animateSlideOut() {
+  gsap.set(sections.value[current.value], {
+    zIndex: 1,
+    pointerEvents: 'none',
+  })
+
+  gsap.set(sections.value[next.value], {
+    autoAlpha: 1,
+    zIndex: 0,
+    pointerEvents: 'auto',
+  })
+
   gsap.set([outerWrappers.value[next.value], innerWrappers.value[next.value]], { xPercent: 0 })
   gsap.set(images.value[next.value], { xPercent: 0 })
 
-  gsap
-    .timeline({
-      defaults: tlDefaults,
-      onComplete: () => {
-        listening.value = true
-        current.value = next.value
-      }
-    })
+  gsap.timeline({
+    defaults: tlDefaults,
+    onComplete: () => {
+      current.value = next.value
+      updateHash(current.value) // ✅ Add this
+      listening.value = true
+    },
+  })
     .to(outerWrappers.value[current.value], { xPercent: 100 }, 0)
     .to(innerWrappers.value[current.value], { xPercent: -100 }, 0)
     .to(images.value[current.value], { xPercent: 15 }, 0)
     .from(images.value[next.value], { xPercent: -15 }, 0)
     .set(images.value[current.value], { xPercent: 0 })
+    .set(sections.value[current.value], {
+      autoAlpha: 0,
+      pointerEvents: 'none',
+    })
+}
+
+
+function updateHash(index) {
+  const sectionId = sectionsList[index].id
+  history.pushState(null, '', `#${sectionId}`)
+}
+
+function goToSection(index) {
+   console.log('Received goTo:', index)
+  if (!listening.value || isNavActive.value || index === current.value || index < 0 || index >= sectionsCount) return
+  listening.value = false
+  next.value = index
+  direction.value = next.value > current.value ? 'right' : 'left'
+  direction.value === 'right' ? animateSlideIn() : animateSlideOut()
 }
 
 function handleDirection() {
-  listening.value = false
-
-  if (direction.value === 'right') {
-    const nextIndex = current.value + 1
-    if (nextIndex >= sections.value.length) {
-      listening.value = true // reset listening since we don't slide
-      return
-    }
-    next.value = nextIndex
-    slideIn()
-  } else if (direction.value === 'left') {
-    const nextIndex = current.value - 1
-    if (nextIndex < 0) {
-      listening.value = true
-      return
-    }
-    next.value = nextIndex
-    slideOut()
+  if (isNavActive.value) {
+    listening.value = true
+    return
   }
-}
-
-
-function goToSection(index) {
-  if (!listening.value || index === current.value) return
   listening.value = false
-  next.value = index
-  // Determine direction for animation
-  direction.value = next.value > current.value ? 'right' : 'left'
-  if (direction.value === 'right') slideIn()
-  else slideOut()
+  const delta = direction.value === 'right' ? 1 : -1
+  const target = current.value + delta
+
+  if (target < 0 || target >= sections.value.length) {
+    listening.value = true
+    return
+  }
+
+  next.value = target
+  direction.value === 'right' ? animateSlideIn() : animateSlideOut()
 }
 
+let scrollDebounce
 function handleWheel(e) {
-  if (!listening.value) return
+  if (!listening.value || scrollDebounce || isNavActive.value) return
   e.preventDefault()
+
   direction.value = e.deltaY > 0 ? 'right' : 'left'
   handleDirection()
+
+  scrollDebounce = setTimeout(() => {
+    scrollDebounce = null
+  }, 800)
 }
+
+const touch = { startX: 0, dx: 0, startY: 0, dy: 0 }
 
 function handleTouchStart(e) {
   const t = e.changedTouches[0]
   touch.startX = t.pageX
   touch.startY = t.pageY
-  touch.startTime = Date.now()
   touch.dx = 0
-  touch.dy = 0
 }
 
 function handleTouchMove(e) {
-  e.preventDefault()
   const t = e.changedTouches[0]
   touch.dx = t.pageX - touch.startX
   touch.dy = t.pageY - touch.startY
+
+  if (Math.abs(touch.dx) > Math.abs(touch.dy)) {
+    e.preventDefault()
+  }
 }
 
 function handleTouchEnd() {
-  if (!listening.value) return
-  const { dx } = touch
-  if (Math.abs(dx) < 50) return
-  direction.value = dx < 0 ? 'right' : 'left'
+  if (!listening.value || Math.abs(touch.dx) < 50 || isNavActive.value) return
+  direction.value = touch.dx < 0 ? 'right' : 'left'
   handleDirection()
 }
 
 function handleKeyDown(e) {
-  if (!listening.value) return
-  if (e.key === 'ArrowRight') {
-    direction.value = 'right'
-    handleDirection()
-  } else if (e.key === 'ArrowLeft') {
-    direction.value = 'left'
-    handleDirection()
-  }
+  if (!listening.value || isNavActive.value) return
+  if (e.key === 'ArrowRight') direction.value = 'right'
+  else if (e.key === 'ArrowLeft') direction.value = 'left'
+  else return
+  handleDirection()
 }
-
-
-
 
 onMounted(() => {
   sections.value = container.value.querySelectorAll('section')
-  images.value = document.querySelectorAll('.bg')
-  outerWrappers.value = gsap.utils.toArray('.outer')
-  innerWrappers.value = gsap.utils.toArray('.inner')
+  images.value = gsap.utils.toArray(container.value.querySelectorAll('.bg'))
+  outerWrappers.value = gsap.utils.toArray(container.value.querySelectorAll('.outer'))
+  innerWrappers.value = gsap.utils.toArray(container.value.querySelectorAll('.inner'))
+  gsap.from(sections.value[0], { autoAlpha: 0, duration: 1 })
 
-  gsap.set(outerWrappers.value, { xPercent: 100 }) // Changed from yPercent to xPercent
+  gsap.set(outerWrappers.value, { xPercent: 100 })
   gsap.set(innerWrappers.value, { xPercent: -100 })
 
   document.addEventListener('wheel', handleWheel, { passive: false })
@@ -283,7 +240,15 @@ onMounted(() => {
   document.addEventListener('touchend', handleTouchEnd)
   document.addEventListener('keydown', handleKeyDown)
 
-  slideIn()
+  animateSlideIn()
+})
+
+onUnmounted(() => {
+  document.removeEventListener('wheel', handleWheel)
+  document.removeEventListener('touchstart', handleTouchStart)
+  document.removeEventListener('touchmove', handleTouchMove)
+  document.removeEventListener('touchend', handleTouchEnd)
+  document.removeEventListener('keydown', handleKeyDown)
 })
 </script>
 
@@ -295,6 +260,12 @@ section {
   position: fixed;
   visibility: hidden;
   will-change: transform;
+  pointer-events: none;
+}
+
+section.active {
+  pointer-events: auto;
+  visibility: visible;
 }
 
 .outer,

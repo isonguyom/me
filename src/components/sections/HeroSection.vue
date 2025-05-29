@@ -33,14 +33,13 @@
                 applications and crafting efficient digital solutions for the maritime industry. </p>
 
             <div class="flex flex-wrap gap-4">
-                <BaseButton variant="primary" @click="navigateTo('#projects')">
+                <BaseButton variant="primary" @click="handleGoTo(3)">
                     View My Works
                 </BaseButton>
 
-                <BaseButton variant="outline" @click="navigateTo('#contact')">Contact Me</BaseButton>
+                <BaseButton variant="outline" @click="handleGoTo(5)">Contact Me</BaseButton>
             </div>
         </div>
-        <!-- <Navbar /> -->
     </div>
 </template>
 
@@ -50,7 +49,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import BaseButton from '@/components/utilities/BaseButton.vue'
-import Navbar from '@/components/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -58,14 +56,10 @@ const heroSection = ref(null)
 const heroContent = ref(null)
 
 
-const navigateTo = (section) => {
-    const targetSection = document.querySelector(section)
-    if (targetSection) {
-        window.scrollTo({
-            top: targetSection.offsetTop,
-            behavior: 'smooth',
-        })
-    }
+const emit = defineEmits(['goTo'])
+
+const handleGoTo = (ind) => {
+   emit('goTo', ind)
 }
 
 // onMounted(() => {
