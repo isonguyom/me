@@ -1,10 +1,6 @@
 <template>
   <main id="mainWrapper" ref="container" class="w-[100vw] h-screen overflow-hidden relative">
-    <Navbar 
-      :currentIndex="current"
-      @go-to="goToSection" 
-      @toggle-nav="isNavActive = $event" 
-    />
+    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" />
     <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
@@ -24,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { gsap } from 'gsap'
 
 import Navbar from '@/components/Navbar.vue'
@@ -152,7 +148,7 @@ function updateHash(index) {
 }
 
 function goToSection(index) {
-   console.log('Received goTo:', index)
+  console.log('Received goTo:', index)
   if (!listening.value || isNavActive.value || index === current.value || index < 0 || index >= sectionsCount) return
   listening.value = false
   next.value = index
@@ -223,6 +219,23 @@ function handleKeyDown(e) {
   else return
   handleDirection()
 }
+
+watch(
+  () => isNavActive.value,
+  (newValue) => {
+    if (newValue) {
+      for (let i = 0; i < sections.value.length; i++) {
+        gsap.set(sections.value[i], { pointerEvents: 'none' })
+      }
+      listening.value = false
+    } else {
+      for (let i = 0; i < sections.value.length; i++) {
+        gsap.set(sections.value[i], { pointerEvents: 'auto' })
+      }
+      listening.value = true
+    }
+  }
+)
 
 onMounted(() => {
   sections.value = container.value.querySelectorAll('section')

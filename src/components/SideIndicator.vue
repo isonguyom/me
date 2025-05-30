@@ -1,8 +1,11 @@
 <template>
     <!-- Side indicator -->
-    <nav class="side-indicator fixed">
-        <button v-for="(section, index) in sectionsCount" :key="index" :class="{ active: isCurrentSection(index) }"
-            @click="handleGoTo(index)" :aria-label="`Go to section ${index + 1}`"></button>
+    <nav class="fixed top-1/2 right-2 transform -translate-y-1/2 flex flex-col gap-2 z-10 pointer-events-none">
+        <button v-for="(section, index) in sectionsCount" :key="index" @click="handleGoTo(index)" :title="titles[index]"
+            :aria-label="`Go to section ${index + 1}`" :class="[
+                'w-3 h-3 border-2 hover:border-accent pointer-events-auto cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary',
+                isCurrentSection(index) ? 'border-accent bg-accent animate-pulse' : darkBg ? 'bg-white/10 border-white/70' : 'bg-black/10 border-black/70'
+            ]"></button>
     </nav>
 </template>
 
@@ -13,51 +16,24 @@ const props = defineProps({
         required: true
     },
     current: {
+        type: Number,
         required: true
+    },
+    darkBg: {
+        type: Boolean,
+        default: false
     }
 })
 
 const emit = defineEmits(['goTo'])
 
-const isCurrentSection = (index) => {
-    if (props.current === null || props.current === undefined) {
-        return false
-    }
-    return index === props.current
-}
+const titles = ['Home', 'About Me', 'My Skills', 'My Projects', 'My Articles', 'Contact Me']
+
+const isCurrentSection = (index) => props.current === index
 
 const handleGoTo = (index) => {
     emit('goTo', index)
 }
-
 </script>
 
-<style scoped>
-/* Side Indicator */
-.side-indicator {
-    position: fixed;
-    top: 50%;
-    right: 2%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 10;
-}
-
-.side-indicator button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    background: transparent;
-    cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.side-indicator button.active {
-    background-color: #0c325b;
-    /* primary color */
-    border-color: #0c325b;
-}
-</style>
+<style scoped></style>

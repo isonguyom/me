@@ -1,11 +1,11 @@
 <template>
-    <header ref="navbar" class="fixed top-0 right-0 w-full bg-transparent z-50 pointer-events-none">
+    <header ref="navbar" class="fixed top-0 right-0 w-full bg-transparent text-white z-50 pointer-events-none">
         <div
             :class="['flex justify-between items-center w-full p-4 md:px-6 z-50', darkBg ? 'text-white' : 'text-black']">
             <!-- Logo and Title -->
             <div class="flex items-center gap-2 z-50">
                 <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span>
-                <h1 id="site-title" class="uppercase md:text-lg font-light tracking-wider">{{ sectionTitle }}</h1>
+                <h1 id="site-title" class="uppercase md:text-lg tracking-wider">{{ sectionTitle }}</h1>
             </div>
 
             <!-- Hamburger Button -->
@@ -18,18 +18,18 @@
 
         <!-- Expanding Circle Background -->
         <div ref="bgCircle"
-            class="fixed top-0 right-0 w-[200px] h-[200px] max-w-[500px] max-h-screen bg-primary rounded-full scale-0 z-10 pointer-events-none">
+            class="fixed top-0 right-0 w-[100px] h-[100px] max-w-[520px] max-h-screen bg-primary scale-0 z-10 pointer-events-none">
         </div>
 
         <!-- Accessible Navigation Menu -->
         <nav v-show="isMenuVisible" ref="menu" id="menu"
-            class="navbar fixed top-0 right-0 h-screen w-full max-w-[520px] p-4 md:px-6 text-white flex-col items-center justify-center space-y-6 hidden z-20"
+            class="navbar fixed top-0 right-0 h-screen w-full max-w-[520px] p-4 md:px-6 pt-16 text-white flex-col items-center justify-between gap-y-6 hidden z-20"
             role="navigation" aria-labelledby="site-title">
             <ul
-                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-1/2 w-full max-w-3xs py-6 mx-auto -mt-12 menu-items">
+                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mx-auto menu-items">
                 <li v-for="(item, index) in menuItems" :key="item">
                     <button @click="handleGoTo(index)" :class="[
-                        'hover:text-accent uppercase font-heading border-b-2 pr-5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
+                        'hover:text-accent uppercase border-b-2 pr-5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
                         activeIndex === index ? 'text-accent border-accent' : 'text-white border-white/0'
                     ]" role="button" tabindex="0" :aria-current="activeIndex === index ? 'page' : null">
                         {{ item }}
@@ -40,15 +40,15 @@
 
             <!-- Footer Content -->
             <div
-                class="flex flex-col sm:flex-row justify-end sm:justify-between items-start sm:items-end space-x-4 rounded-lg p-4 absolute bottom-0 w-full pointer-events-auto">
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-6 w-full pointer-events-auto">
                 <ul class="flex space-x-2 font-bold text-lg sm:order-2">
                     <li v-for="social in socials" :key="social.label">
                         <a :href="social.href" target="_blank" rel="noopener noreferrer" :title="social.name"
-                            class="font-heading uppercase p-1 hover:text-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
+                            class="font-heading uppercase p-1 text-white hover:text-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
                                 social.label }}</a>
                     </li>
                 </ul>
-                <div class="text-sm md:text-base font-light">
+                <div class="text-sm sm:text-base font-light">
                     <p><span class="font-semibold">Phone:</span> +2348022475918</p>
                     <p><span class="font-semibold">Email:</span> isonguyombiz@gmail.com</p>
                 </div>
@@ -96,8 +96,8 @@ let closeTimeline = null
 
 
 const sectionTitle = computed(() => {
-  if (activeIndex.value === 0) return ''
-  return menuItems[activeIndex.value] ?? 'Home'
+    if (activeIndex.value === 0) return ''
+    return menuItems[activeIndex.value] ?? 'Home'
 })
 
 
@@ -132,9 +132,8 @@ function openMenu() {
         left: centerX,
         xPercent: -50,
         yPercent: -50,
-        borderRadius: '50%',
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
         scale: 0.2
     })
 
@@ -142,14 +141,14 @@ function openMenu() {
     openTimeline.set(menu.value, { display: 'flex' })
 
     openTimeline.to(bgCircle.value, {
-        scale: 1.1,
+        scale: 1,
         width: getNavbarWidth(),
         height: '100vh',
         top: 0,
         left: '100vw',
         xPercent: -100,
         yPercent: 0,
-        borderRadius: '0%',
+        ease: 'expo.inOut',
         duration: 1.25
     })
 
@@ -199,13 +198,13 @@ function closeMenu() {
             bgCircle.value,
             {
                 scale: 0,
-                width: 200,
-                height: 200,
-                borderRadius: '50%',
+                width: 100,
+                height: 100,
                 top: centerY,
                 left: centerX,
                 xPercent: -50,
                 yPercent: -50,
+                ease: 'expo.inOut',
                 duration: 1,
             },
             '-=0.5'
@@ -239,10 +238,9 @@ const debounce = (fn, delay = 200) => {
 const handleResize = debounce(() => {
     if (isMenuOpen.value && bgCircle.value) {
         gsap.to(bgCircle.value, {
-            scale: 1.1,
+            scale: 1,
             width: getNavbarWidth(),
             height: '100vh',
-            borderRadius: '0%',
             duration: 1,
             ease: 'expo.inOut'
         })
