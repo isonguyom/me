@@ -23,10 +23,10 @@
 
         <!-- Accessible Navigation Menu -->
         <nav v-show="isMenuVisible" ref="menu" id="menu"
-            class="navbar fixed top-0 right-0 h-screen w-full max-w-[520px] p-4 md:px-6 pt-16 text-white flex-col items-center justify-between gap-y-6 hidden z-20"
+            class="navbar fixed top-0 right-0 h-screen w-full max-w-[520px] px-4 md:px-6 py-6 text-white flex-col justify-center gap-y-8 z-20"
             role="navigation" aria-labelledby="site-title">
             <ul
-                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mx-auto menu-items">
+                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mt-6 menu-items">
                 <li v-for="(item, index) in menuItems" :key="item">
                     <button @click="handleGoTo(index)" :class="[
                         'hover:text-accent uppercase border-b-2 pr-5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
@@ -39,19 +39,20 @@
             </ul>
 
             <!-- Footer Content -->
-            <div
-                class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 sm:gap-6 w-full pointer-events-auto">
-                <ul class="flex space-x-2 font-bold text-lg sm:order-2">
+            <div class="flex justify-between items-end gap-3 flex-wrap sm:gap-6 w-full pointer-events-auto mt-10">
+                <div class="text-sm sm:text-base font-light">
+                    <p><span class="font-semibold">Phone:</span> +2348022475918</p>
+                    <p><span class="font-semibold">Email:</span> isonguyombiz@gmail.com</p>
+                </div>
+
+                <ul class="flex space-x-2 font-bold text-lg">
                     <li v-for="social in socials" :key="social.label">
                         <a :href="social.href" target="_blank" rel="noopener noreferrer" :title="social.name"
                             class="font-heading uppercase p-1 text-white hover:text-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
                                 social.label }}</a>
                     </li>
                 </ul>
-                <div class="text-sm sm:text-base font-light">
-                    <p><span class="font-semibold">Phone:</span> +2348022475918</p>
-                    <p><span class="font-semibold">Email:</span> isonguyombiz@gmail.com</p>
-                </div>
+
             </div>
         </nav>
     </header>
@@ -138,7 +139,6 @@ function openMenu() {
     })
 
     openTimeline = gsap.timeline({ defaults: { ease: 'expo.inOut' } })
-    openTimeline.set(menu.value, { display: 'flex' })
 
     openTimeline.to(bgCircle.value, {
         scale: 1,
