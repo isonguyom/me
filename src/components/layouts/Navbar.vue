@@ -5,7 +5,8 @@
             <!-- Logo and Title -->
             <div class="flex items-center gap-2 z-50">
                 <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span>
-                <h1 id="site-title" class="uppercase md:text-lg tracking-wider">{{ sectionTitle }}</h1>
+                <h1 ref="sectionTitleRef" id="site-title"
+                    class="uppercase md:text-lg tracking-wider transition-all duration-500">{{ sectionTitle }}</h1>
             </div>
 
             <!-- Hamburger Button -->
@@ -82,8 +83,9 @@ const menuButton = ref(null)
 const menu = ref(null)
 const navbar = ref(null)
 const bgCircle = ref(null)
+const sectionTitleRef = ref('')
 
-const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Articles', 'Contact']
+const menuItems = ['Home', 'About Me', 'Skills', 'My Works', 'Articles', 'Contact Me']
 const socials = [
     { label: 'GH.', name: 'Github', href: '#' },
     { label: 'LI.', name: 'LinkedIn', href: '#' },

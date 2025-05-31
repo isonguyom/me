@@ -244,9 +244,10 @@ function handleTouchMove(e) {
   touch.dy = t.pageY - touch.startY
 
   if (Math.abs(touch.dx) > Math.abs(touch.dy)) {
-    e.preventDefault()
+    if (e.cancelable) e.preventDefault()
   }
 }
+
 
 function handleTouchEnd() {
   if (!listening.value || Math.abs(touch.dx) < 50 || isNavActive.value) return
