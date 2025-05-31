@@ -53,7 +53,7 @@ import { useProjectsStore } from '@/stores/projects'
 
 import ProjectCard from '@/components/cards/ProjectCard.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/layouts/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

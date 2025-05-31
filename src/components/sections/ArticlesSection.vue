@@ -45,7 +45,7 @@ import { useArticlesStore } from '@/stores/articles'
 
 import ArticleCard from '@/components/cards/ArticleCard.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/layouts/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

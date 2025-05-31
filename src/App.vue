@@ -23,9 +23,9 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { gsap } from 'gsap'
 
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
-import SideIndicator from '@/components/SideIndicator.vue'
+import Navbar from '@/components/layouts/Navbar.vue'
+import Footer from '@/components/layouts/Footer.vue'
+import SideIndicator from '@/components/layouts/SideIndicator.vue'
 
 import HeroSection from '@/components/sections/HeroSection.vue'
 import AboutSection from '@/components/sections/AboutSection.vue'

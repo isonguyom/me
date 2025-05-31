@@ -46,7 +46,7 @@ import InputField from '@/components/utilities/InputField.vue'
 import TextareaField from '@/components/utilities/TextareaField.vue'
 import BaseButton from '@/components/utilities/BaseButton.vue'
 import Toast from '@/components/utilities/Toast.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/layouts/Navbar.vue'
 
 const form = ref({
   name: '',

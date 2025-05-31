@@ -51,7 +51,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/layouts/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

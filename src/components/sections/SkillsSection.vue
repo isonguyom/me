@@ -37,7 +37,7 @@
 
 <script setup>
 import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/layouts/Navbar.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
