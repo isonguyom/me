@@ -45,7 +45,7 @@
                     <p><span class="font-semibold">Email:</span> isonguyombiz@gmail.com</p>
                 </div>
 
-                <ul class="flex space-x-2 font-bold text-lg">
+                <ul class="flex space-x-2 font-bold text-lg socials">
                     <li v-for="social in socials" :key="social.label">
                         <a :href="social.href" target="_blank" rel="noopener noreferrer" :title="social.name"
                             class="font-heading uppercase p-1 text-white hover:text-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
@@ -152,12 +152,14 @@ function openMenu() {
         duration: 1.25
     })
 
-    const menuItemsEl = menu.value?.querySelectorAll('li') || []
+    const menuItemsEl = menu.value?.querySelectorAll('.menu-items li') || []
     const footerText = menu.value?.querySelectorAll('p') || []
+    const socialsEl = menu.value?.querySelectorAll('.socials li') || []
     const itemsWrapper = menu.value?.querySelector('.menu-items')
 
     openTimeline.fromTo(menuItemsEl, { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08 }, '-=1')
     openTimeline.fromTo(footerText, { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08 }, '-=0.8')
+    openTimeline.fromTo(socialsEl, { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08 }, '-=0.6')
     if (itemsWrapper) {
         openTimeline.fromTo(itemsWrapper, { opacity: 0 }, { opacity: 1 }, '-=1')
     }
@@ -186,10 +188,12 @@ function closeMenu() {
 
         const menuItemsEl = menu.value?.querySelectorAll('li') || []
         const footerText = menu.value?.querySelectorAll('p') || []
+        const socialsEl = menu.value?.querySelectorAll('.socials li') || []
         const itemsWrapper = menu.value?.querySelector('.menu-items')
 
-        closeTimeline.to(menuItemsEl, { y: 20, opacity: 0, stagger: -0.08 })
+        closeTimeline.to(socialsEl, { y: 20, opacity: 0, stagger: -0.08 }, '-=0.2')
         closeTimeline.to(footerText, { y: 20, opacity: 0, stagger: -0.08 }, '-=0.2')
+        closeTimeline.to(menuItemsEl, { y: 20, opacity: 0, stagger: -0.08 })
         if (itemsWrapper) {
             closeTimeline.to(itemsWrapper, { opacity: 0 }, '-=0.1')
         }

@@ -6,7 +6,7 @@
         <div class="w-full flex justify-between items-end">
             <!-- Left: Copyright -->
             <div>
-                <small class="text-xs sm:text-sm font-medium block">
+                <small class="text-sm md:text-base font-medium block opacity-70">
                     &copy; {{ new Date().getFullYear() }} | All rights reserved.
                 </small>
             </div>
