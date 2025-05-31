@@ -1,5 +1,5 @@
 <template>
-    <footer :class="[
+    <footer ref="footer" :class="[
         'bg-transparent p-4 md:px-6 z-40 fixed bottom-0 w-full pointer-events-none',
         darkBg ? 'text-white stroke-white' : 'text-black stroke-black'
     ]">
@@ -36,6 +36,9 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
+
 import IconArrowRight from '@/components/icons/IconArrowRight.vue'
 import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
 
@@ -56,9 +59,18 @@ defineProps({
 
 const emit = defineEmits(['goTo'])
 
+const footer = ref(null)
+
 const handleGoTo = (ind) => {
     emit('goTo', ind)
 }
+
+onMounted(() => {
+
+    if (footer.value) {
+        gsap.from(footer.value, { y: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.6 })
+    }
+})
 </script>
 
 <style scoped>

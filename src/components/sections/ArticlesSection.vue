@@ -2,8 +2,6 @@
   <div ref="articlesSection" id="articles"
     class="h-full w-full bg-background flex justify-center items-center px-4 md:px-6 py-10 relative">
 
-    <Navbar />
-    <SectionTitle title="Articles" subtitle="What I've Written" />
 
     <div class="w-full h-full px-2 overflow-y-auto flex flex-col justify-center items-center z-10">
       <h2 class="lg:hidden text-lg text-center md:text-xl lg:text-left font-semibold font-heading text-primary mb-4">My
@@ -44,8 +42,7 @@ import 'swiper/css/navigation'
 import { useArticlesStore } from '@/stores/articles'
 
 import ArticleCard from '@/components/cards/ArticleCard.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/layouts/Navbar.vue'
+
 
 gsap.registerPlugin(ScrollTrigger)
 

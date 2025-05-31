@@ -2,8 +2,7 @@
   <div
     class="h-full w-full bg-secondary flex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always bg-gradient-to-br from-primary to-primary/90 text-background"
     id="contact">
-    <SectionTitle title="Contact me" subtitle="Let's talk" />
-    <Navbar darkBg />
+
     <div
       class="max-w-xl lg:max-w-full w-full h-full overflow-y-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-6">
       <div class="lg:basis-1/2">
@@ -41,12 +40,11 @@
 import { ref } from 'vue'
 import emailjs from '@emailjs/browser'
 
-import SectionTitle from '@/components/SectionTitle.vue'
 import InputField from '@/components/utilities/InputField.vue'
 import TextareaField from '@/components/utilities/TextareaField.vue'
 import BaseButton from '@/components/utilities/BaseButton.vue'
 import Toast from '@/components/utilities/Toast.vue'
-import Navbar from '@/components/layouts/Navbar.vue'
+
 
 const form = ref({
   name: '',

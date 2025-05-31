@@ -6,9 +6,6 @@
       style="background-image: url('assets/skills-bg.png')"></div>
     <div class="absolute inset-0 bg-white/20"></div>
 
-    <Navbar />
-    <SectionTitle title="Skills" subtitle="What I Can Do" />
-
     <div class="w-full h-full px-2 overflow-y-auto flex flex-col justify-center items-center">
       <h2 class="lg:hidden text-lg text-center md:text-xl lg:text-left font-semibold font-heading text-primary mb-4">
         My Skills
@@ -36,8 +33,6 @@
 </template>
 
 <script setup>
-import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/layouts/Navbar.vue'
 
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'

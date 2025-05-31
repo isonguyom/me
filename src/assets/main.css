@@ -54,9 +54,3 @@ h5,
 h6 {
   font-family: var(--font-heading);
 }
-
-/* Global style - put this in your global CSS (not scoped) */
-.no-scroll {
-  overflow: hidden;
-  height: 100%;
-}

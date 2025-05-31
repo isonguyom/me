@@ -1,10 +1,13 @@
 <template>
-  <main id="mainWrapper" ref="container" class="w-[100vw] h-screen overflow-hidden relative">
+  <main id="mainWrapper" ref="container" tabindex="0" class="w-[100vw] h-screen overflow-hidden relative">
     <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" />
     <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
-      <section :class="[Component.class, current === index ? 'active' : '']" :id="Component.id">
+      <section :class="[Component.class, current === index ? 'active' : '']" :id="Component.id"
+        aria-labelledby="`${Component.id}-heading`" :aria-hidden="current !== index ? 'true' : 'false'"
+        :tabindex="current === index ? 0 : -1">
+        <h2 :id="`${Component.id}-heading`" class="sr-only">{{ Component.id }}</h2>
         <div class="outer">
           <div class="inner">
             <div class="bg">
@@ -15,12 +18,13 @@
       </section>
     </template>
 
+
     <Footer :index="current" :total="sectionsCount" @go-to="goToSection" />
   </main>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, watchEffect } from 'vue'
 import { gsap } from 'gsap'
 
 import Navbar from '@/components/layouts/Navbar.vue'
@@ -37,11 +41,10 @@ import ContactSection from '@/components/sections/ContactSection.vue'
 const container = ref(null)
 const current = ref(0)
 const next = ref(0)
-const initialLoad = ref(true)
-
 const direction = ref('right')
 const listening = ref(false)
-const isNavActive = ref(false)   // <--- NEW: flag for nav menu active state
+const isNavActive = ref(false)
+const initialLoad = ref(true)
 
 const sections = ref([])
 const images = ref([])
@@ -59,16 +62,55 @@ const sectionsList = [
 ]
 
 const sectionsCount = sectionsList.length
-
 const tlDefaults = { ease: 'slow.inOut', duration: 1.25 }
 
+let isTransitioning = false // ✅ (2) Navigation lock
+
+function lockTransition(duration = 1300) {
+  isTransitioning = true
+  setTimeout(() => { isTransitioning = false }, duration)
+}
+
+// ✅ (3) Utility function to reset GSAP styles
+function resetSectionStyles(index) {
+  const outerX = index === next.value ? 0 : index === current.value ? 100 : 100
+  const innerX = index === next.value ? 0 : index === current.value ? -100 : -100
+
+  gsap.set(outerWrappers.value[index], { xPercent: outerX })
+  gsap.set(innerWrappers.value[index], { xPercent: innerX })
+
+  gsap.set(images.value[index], { xPercent: 0 })
+}
+
 function animateSlideIn() {
-  if (!initialLoad.value) {
-    gsap.set(sections.value[current.value], {
-      zIndex: 0,
-      pointerEvents: 'none',
+  if (initialLoad.value) {
+    // Directly show the initial section without animation
+    gsap.set(sections.value[next.value], {
+      autoAlpha: 1,
+      zIndex: 1,
+      pointerEvents: 'auto',
     })
+
+    gsap.set([outerWrappers.value[next.value], innerWrappers.value[next.value]], {
+      xPercent: 0,
+    })
+
+    gsap.set(images.value[next.value], {
+      xPercent: 0,
+    })
+
+    current.value = next.value
+    updateHash(current.value)
+    listening.value = true
+    initialLoad.value = false
+    return
   }
+
+  // Animated transition for subsequent slides
+  gsap.set(sections.value[current.value], {
+    zIndex: 0,
+    pointerEvents: 'none',
+  })
 
   gsap.set(sections.value[next.value], {
     autoAlpha: 1,
@@ -83,7 +125,7 @@ function animateSlideIn() {
     defaults: tlDefaults,
     onComplete: () => {
       current.value = next.value
-      updateHash(current.value) // ✅ Add this
+      updateHash(current.value)
       listening.value = true
       initialLoad.value = false
     },
@@ -92,19 +134,18 @@ function animateSlideIn() {
   tl.to([outerWrappers.value[next.value], innerWrappers.value[next.value]], { xPercent: 0 }, 0)
     .from(images.value[next.value], { xPercent: 15 }, 0)
 
-  if (!initialLoad.value) {
-    tl.to(images.value[current.value], { xPercent: -15 }, 0)
-      .set(outerWrappers.value[current.value], { xPercent: 100 })
-      .set(innerWrappers.value[current.value], { xPercent: -100 })
-      .set(images.value[current.value], { xPercent: 0 })
-      .set(sections.value[current.value], {
-        autoAlpha: 0,
-        pointerEvents: 'none',
-      })
-  }
+  tl.to(images.value[current.value], { xPercent: -15 }, 0)
+    .set(outerWrappers.value[current.value], { xPercent: 100 })
+    .set(innerWrappers.value[current.value], { xPercent: -100 })
+    .set(images.value[current.value], { xPercent: 0 })
+    .set(sections.value[current.value], {
+      autoAlpha: 0,
+      pointerEvents: 'none',
+    })
 
   tl.play(0)
 }
+
 
 
 function animateSlideOut() {
@@ -141,20 +182,21 @@ function animateSlideOut() {
     })
 }
 
-
 function updateHash(index) {
   const sectionId = sectionsList[index].id
   history.pushState(null, '', `#${sectionId}`)
 }
 
+// ✅ (2) Debounced and locked transition
 function goToSection(index) {
-  console.log('Received goTo:', index)
-  if (!listening.value || isNavActive.value || index === current.value || index < 0 || index >= sectionsCount) return
+  if (!listening.value || isNavActive.value || index === current.value || isTransitioning || index < 0 || index >= sectionsCount) return
+  lockTransition()
   listening.value = false
   next.value = index
   direction.value = next.value > current.value ? 'right' : 'left'
   direction.value === 'right' ? animateSlideIn() : animateSlideOut()
 }
+
 
 function handleDirection() {
   if (isNavActive.value) {
@@ -237,24 +279,62 @@ watch(
   }
 )
 
+watchEffect(() => {
+  if (!initialLoad.value) {
+    updateHash(current.value)
+  }
+})
+
+
+
+
+// ✅ (6) Animate transition on browser back/forward
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.slice(1)
+  const index = sectionsList.findIndex(s => s.id === hash)
+  if (index !== -1) goToSection(index)
+})
+
 onMounted(() => {
+  container.value.focus()
   sections.value = container.value.querySelectorAll('section')
   images.value = gsap.utils.toArray(container.value.querySelectorAll('.bg'))
   outerWrappers.value = gsap.utils.toArray(container.value.querySelectorAll('.outer'))
   innerWrappers.value = gsap.utils.toArray(container.value.querySelectorAll('.inner'))
-  gsap.from(sections.value[0], { autoAlpha: 0, duration: 1 })
 
   gsap.set(outerWrappers.value, { xPercent: 100 })
   gsap.set(innerWrappers.value, { xPercent: -100 })
+
+  // ✅ Handle hash or default to first section
+  const hash = window.location.hash.slice(1)
+  const indexFromHash = sectionsList.findIndex(s => s.id === hash)
+  const initialIndex = indexFromHash !== -1 ? indexFromHash : 0
+
+  current.value = initialIndex
+  next.value = initialIndex
+
+  // ✅ Immediately set the initial section visible with no animation
+  gsap.set(sections.value[initialIndex], {
+    autoAlpha: 1,
+    zIndex: 1,
+    pointerEvents: 'auto',
+    visibility: 'visible',
+  })
+  gsap.set(outerWrappers.value[initialIndex], { xPercent: 0 })
+  gsap.set(innerWrappers.value[initialIndex], { xPercent: 0 })
+  gsap.set(images.value[initialIndex], { xPercent: 0 })
+
+  initialLoad.value = false
+  updateHash(initialIndex)
+  listening.value = true
 
   document.addEventListener('wheel', handleWheel, { passive: false })
   document.addEventListener('touchstart', handleTouchStart, { passive: false })
   document.addEventListener('touchmove', handleTouchMove, { passive: false })
   document.addEventListener('touchend', handleTouchEnd)
   document.addEventListener('keydown', handleKeyDown)
-
-  animateSlideIn()
 })
+
 
 onUnmounted(() => {
   document.removeEventListener('wheel', handleWheel)
@@ -263,7 +343,9 @@ onUnmounted(() => {
   document.removeEventListener('touchend', handleTouchEnd)
   document.removeEventListener('keydown', handleKeyDown)
 })
+
 </script>
+
 
 <style scoped>
 section {
@@ -272,21 +354,20 @@ section {
   top: 0;
   position: fixed;
   visibility: hidden;
-  will-change: transform;
-  pointer-events: none;
+  will-change: auto;
 }
 
 section.active {
-  pointer-events: auto;
   visibility: visible;
 }
+
 
 .outer,
 .inner {
   width: 100%;
   height: 100%;
   overflow-y: hidden;
-  will-change: transform;
+  will-change: auto;
 }
 
 .bg {

@@ -7,9 +7,6 @@
       style="background-image: url('./assets/projects-bg.png')"></div>
     <div class="absolute inset-0 bg-black/20"></div>
 
-    <Navbar darkBg />
-    <SectionTitle title="Projects" subtitle="What I've Built" />
-
     <div class="w-full h-full px-2 overflow-y-auto flex flex-col justify-center items-center z-10">
 
       <h2 class="lg:hidden text-lg text-center md:text-xl lg:text-left font-semibold font-heading text-secondary mb-4">
@@ -52,8 +49,6 @@ import 'swiper/css/pagination'
 import { useProjectsStore } from '@/stores/projects'
 
 import ProjectCard from '@/components/cards/ProjectCard.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/layouts/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 

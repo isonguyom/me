@@ -8,8 +8,6 @@
 
         <div class="absolute inset-0 bg-primary/20"></div>
 
-        <Navbar />
-        <SectionTitle title="About Me" subtitle="Who I Am" />
 
         <div ref="aboutContent"
             class="max-w-4xl w-full mx-auto h-full px-2 overflow-y-auto lg:flex justify-center items-center">
@@ -49,9 +47,6 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-import SectionTitle from '@/components/SectionTitle.vue'
-import Navbar from '@/components/layouts/Navbar.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
