@@ -1,100 +1,128 @@
 <template>
-    <div ref="heroSection" id="home"
-        class="h-full w-full bg-secondary flex justify-center items-center px-4 md:px-6 py-10 relative scroll-snap-start snap-always">
+  <div
+    ref="heroSection"
+    id="home"
+    class="h-full w-full bg-secondary flex justify-center items-center py-10"
+  >
+    <div
+      ref="heroContent"
+      class="relative z-10 w-full max-h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6"
+    >
+      <h1 class="font-bold uppercase md:text-xl lg:text-2xl">
+        Hi, I'm <br />
+        <span ref="splitTextEl" class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
+          <!-- We'll split and render letters in JS -->
+        </span>
+      </h1>
+      <p class="md:text-xl lg:text-2xl mb-6 max-w-xl lg:max-w-3xl">
+        A proficient
+        <span class="font-semibold capitalize">Frontend Developer</span> building
+        modern, responsive web applications and crafting efficient digital
+        solutions for the maritime industry.
+      </p>
 
-        <!-- Background Image container -->
-        <div class="absolute inset-0 bg-cover bg-center opacity-3 pointer-events-none"
-            style="background-image: url('assets/hero-bg.svg')">
-        </div>
+      <div class="flex flex-wrap gap-4">
+        <BaseButton variant="primary" @click="handleGoTo(3)">
+          View My Works
+        </BaseButton>
 
-        <!-- Subtle Transparent Pattern Background -->
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"
-                preserveAspectRatio="xMidYMid slice">
-                <defs>
-                    <pattern id="circle-pattern" patternUnits="userSpaceOnUse" width="10" height="10">
-                        <circle cx="2" cy="2" r="2" fill="rgba(255, 255, 255, 0.2)" />
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#circle-pattern)" />
-            </svg>
-        </div>
-
-        <div class="absolute inset-0 bg-black/10"></div>
-
-        <div ref="heroContent" class="relative z-10 w-full">
-            <h1 class="font-bold uppercase md:text-xl lg:2xl">
-                Hi, I'm <br /> <span class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl">Martin
-                    Isonguyo</span>
-            </h1>
-            <p class="md:text-xl lg:text-2xl mb-6 max-w-xl lg:max-w-3xl">
-                A proficient <span class="font-semibold capitalize">Frontend Developer</span> building modern,
-                responsive web
-                applications and crafting efficient digital solutions for the maritime industry. </p>
-
-            <div class="flex flex-wrap gap-4">
-                <BaseButton variant="primary" @click="handleGoTo(3)">
-                    View My Works
-                </BaseButton>
-
-                <BaseButton variant="outline" @click="handleGoTo(5)">Contact Me</BaseButton>
-            </div>
-        </div>
+        <BaseButton variant="outline" @click="handleGoTo(5)">
+          Contact Me
+        </BaseButton>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ref, onMounted, onUnmounted } from "vue";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import BaseButton from '@/components/utilities/BaseButton.vue'
+import BaseButton from "@/components/utilities/BaseButton.vue";
 
-gsap.registerPlugin(ScrollTrigger)
+const heroSection = ref(null);
+const heroContent = ref(null);
+const splitTextEl = ref(null);
 
-const heroSection = ref(null)
-const heroContent = ref(null)
-
-
-const emit = defineEmits(['goTo'])
-
+const emit = defineEmits(["goTo"]);
 const handleGoTo = (ind) => {
-   emit('goTo', ind)
-}
+  emit("goTo", ind);
+};
 
-// onMounted(() => {
-//     gsap.fromTo(
-//         heroContent.value,
-//         { xPercent: -100, opacity: 0 },
-//         {
-//             xPercent: 0,
-//             opacity: 1,
-//             duration: 1.5,
-//             ease: 'power4.out',
-//             scrollTrigger: {
-//                 trigger: heroSection.value,
-//                 start: 'top center+=100', // Slight delay for smoother reveal
-//                 end: 'bottom center',
-//                 scrub: true, // Sync animation with scroll
-//                 markers: false,
-//             },
-//         }
-//     )
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger);
 
-//     // Optional exit animation when section scrolls out of view
-//     gsap.to(heroContent.value, {
-//         opacity: 0,
-//         duration: 1,
-//         ease: 'power3.in',
-//         scrollTrigger: {
-//             trigger: heroSection.value,
-//             start: 'bottom center',
-//             end: 'bottom top',
-//             scrub: true,
-//             markers: false,
-//         },
-//     })
-// })
+  const textEl = splitTextEl.value;
+  const text = "Martin Isonguyo";
+
+  // Clear container
+  textEl.textContent = "";
+
+  const words = text.split(" ");
+
+  words.forEach((word) => {
+    const wordSpan = document.createElement("span");
+    wordSpan.style.display = "inline-block";
+    wordSpan.style.marginRight = "0.25em";
+
+    word.split("").forEach((char) => {
+      const charSpan = document.createElement("span");
+      charSpan.textContent = char;
+      charSpan.style.display = "inline-block";
+      charSpan.style.opacity = "0";
+      charSpan.style.transform = "translateY(20px)";
+      wordSpan.appendChild(charSpan);
+    });
+
+    textEl.appendChild(wordSpan);
+  });
+
+  // Create timeline for the entire heroContent animation
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: heroSection.value,
+      start: "top 85%",
+      toggleActions: "play none none none",
+    },
+  });
+
+  // Animate split letters first
+  tl.to(splitTextEl.value.querySelectorAll("span > span"), {
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    stagger: 0.05,
+    ease: "power2.out",
+  })
+
+  // Then animate paragraph
+  .from(
+    heroContent.value.querySelector("p"),
+    {
+      y: 30,
+      autoAlpha: 0,
+      duration: 0.8,
+    },
+    ">0.2" // start 0.2 seconds after letters finish
+  )
+
+  // Then animate buttons
+  .from(
+    heroContent.value.querySelectorAll("button"),
+    {
+      y: 20,
+      autoAlpha: 0,
+      duration: 0.6,
+      stagger: 0.2,
+    },
+    ">0.1" // start 0.1 seconds after paragraph animation starts
+  );
+});
+
+onUnmounted(() => {
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+});
 </script>
 
 <style scoped></style>

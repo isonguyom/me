@@ -53,7 +53,7 @@ const innerWrappers = ref([])
 
 
 const sectionsList = [
-  { id: 'home', class: 'hero bg-secondary', component: HeroSection },
+  { id: 'home', class: 'hero', component: HeroSection },
   { id: 'aboutMe', class: 'about', component: AboutSection },
   { id: 'mySkills', class: 'skills', component: SkillsSection },
   { id: 'myProjects', class: 'projects', component: ProjectsSection },
