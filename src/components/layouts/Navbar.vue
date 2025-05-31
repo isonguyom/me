@@ -26,7 +26,7 @@
             class="navbar fixed top-0 right-0 h-screen w-full max-w-[520px] px-4 md:px-6 py-6 text-white flex-col justify-center gap-y-8 z-20"
             role="navigation" aria-labelledby="site-title">
             <ul
-                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mt-6 menu-items">
+                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mt-6 menu-items mx-auto">
                 <li v-for="(item, index) in menuItems" :key="item">
                     <button @click="handleGoTo(index)" :class="[
                         'hover:text-accent uppercase border-b-2 pr-5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
