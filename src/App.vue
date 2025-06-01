@@ -11,7 +11,7 @@
         <div class="outer">
           <div class="inner">
             <div class="bg">
-              <component :is="Component.component" :key="Component.id" @go-to="goToSection" />
+              <component :is="Component.component" :key="Component.id" @go-to="goToSection" @slider-active="isSliderActive = $event" />
             </div>
           </div>
         </div>
@@ -43,8 +43,9 @@ const current = ref(0)
 const next = ref(0)
 const direction = ref('right')
 const listening = ref(false)
-const isNavActive = ref(false)
 const initialLoad = ref(true)
+const isNavActive = ref(false)
+const isSliderActive = ref(false)
 
 const sections = ref([])
 const images = ref([])
@@ -229,7 +230,7 @@ function handleDirection() {
 
 let scrollDebounce
 function handleWheel(e) {
-  if (!listening.value || scrollDebounce || isNavActive.value) return
+  if (!listening.value || scrollDebounce || isNavActive.value || isSliderActive.value) return
   e.preventDefault()
 
   direction.value = e.deltaY > 0 ? 'right' : 'left'

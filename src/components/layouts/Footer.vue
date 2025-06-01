@@ -27,7 +27,7 @@
 
                 <!-- Left arrow (go backward) -->
                 <button v-else @click="handleGoTo(total - 2)" aria-label="Go to previous section" title="Previous Page"
-                    class="pointer-events-auto cursor-pointer stroke-white hover:stroke-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent animate-shake-left animate-pulse">
+                    class="pointer-events-auto cursor-pointer hover:stroke-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent animate-shake-left animate-pulse">
                     <IconArrowLeft />
                 </button>
             </div>
