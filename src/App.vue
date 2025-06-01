@@ -1,7 +1,7 @@
 <template>
   <main id="mainWrapper" ref="container" tabindex="0" class="w-[100vw] h-screen overflow-hidden relative">
-    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" />
-    <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" />
+    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" :darkBg="isDarkBg" />
+    <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" :darkBg="isDarkBg" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
       <section :class="[Component.class, current === index ? 'active' : '']" :id="Component.id"
@@ -19,12 +19,12 @@
     </template>
 
 
-    <Footer :index="current" :total="sectionsCount" @go-to="goToSection" />
+    <Footer :index="current" :total="sectionsCount" @go-to="goToSection" :darkBg="isDarkBg" />
   </main>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch, watchEffect } from 'vue'
+import { ref, onMounted, onUnmounted, watch, watchEffect, computed } from 'vue'
 import { gsap } from 'gsap'
 
 import Navbar from '@/components/layouts/Navbar.vue'
@@ -63,6 +63,14 @@ const sectionsList = [
 
 const sectionsCount = sectionsList.length
 const tlDefaults = { ease: 'slow.inOut', duration: 1.25 }
+
+// Compute isDarkBg based on the current section
+const isDarkBg = computed(() => {
+  const currentSection = sectionsList[current.value]
+   const darkSections = ['projects', 'contact']
+  return darkSections.includes(currentSection.class);
+})
+
 
 let isTransitioning = false // ✅ (2) Navigation lock
 
@@ -186,6 +194,9 @@ function updateHash(index) {
   const sectionId = sectionsList[index].id
   history.pushState(null, '', `#${sectionId}`)
 }
+
+
+
 
 // ✅ (2) Debounced and locked transition
 function goToSection(index) {

@@ -6,7 +6,7 @@
   >
     <div
       ref="aboutContent"
-      class="relative z-10 w-full max-h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6 max-w-4xl mx-auto"
+      class="relative z-10 w-full max-h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6 max-w-4xl mx-auto scroll-smooth"
     >
       <article class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 text-balance">
         <p class="text-justify">

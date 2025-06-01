@@ -6,7 +6,7 @@
   >
     <div
       ref="heroContent"
-      class="relative z-10 w-full max-h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6"
+      class="relative z-10 w-full max-h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6 scroll-smooth"
     >
       <h1 class="font-bold uppercase md:text-xl lg:text-2xl">
         Hi, I'm <br />
