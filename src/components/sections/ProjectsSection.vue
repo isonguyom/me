@@ -1,5 +1,5 @@
 <template>
-  <div ref="projectsSection" id="projects" class="relative w-full h-screen bg-black text-white overflow-hidden">
+  <div ref="projectsSection" id="projects" class="relative w-full h-full bg-black text-white overflow-hidden">
     <!-- Toggle Button -->
     <button @click="handleSliding"
       class="absolute z-20 left-1/2 bottom-4 transform -translate-x-1/2 stroke-white cursor-pointer hover:stroke-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent animate-pulse"
