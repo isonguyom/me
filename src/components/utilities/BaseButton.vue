@@ -5,7 +5,7 @@
       variantClass,
       customClass,
       disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
-      variant !== 'ghost' ? 'btn hover-slide-up hover:border-accent hover:text-white' : ''
+      variant.includes('ghost') ? '' : 'btn hover-slide-up hover:border-accent hover:text-white'
     ]"
     :type="type"
     :disabled="disabled"
@@ -13,7 +13,7 @@
     <span
       :class="[
         'flex gap-x-3 items-center relative inset-0 w-fit',
-        variant === 'ghost' ? 'p-0' : 'px-6 py-3'
+        variant.includes('ghost') ? 'p-1' : 'px-6 py-3'
       ]"
     >
       <slot />
@@ -52,7 +52,9 @@ const variantClass = computed(() => {
     case 'outline':
       return 'border-2 border-primary text-primary'
     case 'ghost':
-      return 'text-primary hover:text-accent'
+      return 'text-primary border-b hover:text-accent'
+    case 'ghost-sec':
+      return 'text-secondary border-b hover:text-accent'
     default:
       return 'bg-primary text-white'
   }

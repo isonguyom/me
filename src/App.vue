@@ -4,7 +4,7 @@
     <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" :darkBg="isDarkBg" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
-      <section :class="[Component.class, current === index ? 'active' : '']" :id="Component.id"
+      <section :class="['section', Component.class, current === index ? 'active' : '']" :id="Component.id"
         aria-labelledby="`${Component.id}-heading`" :aria-hidden="current !== index ? 'true' : 'false'"
         :tabindex="current === index ? 0 : -1">
         <h2 :id="`${Component.id}-heading`" class="sr-only">{{ Component.id }}</h2>

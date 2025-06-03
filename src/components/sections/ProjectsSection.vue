@@ -1,15 +1,16 @@
 <template>
-  <div ref="projectsSection" id="projects" class="relative w-full h-full bg-black text-white overflow-hidden">
-    <!-- Toggle Button -->
-    <button @click="handleSliding"
-      class="absolute z-20 left-1/2 bottom-4 transform -translate-x-1/2 stroke-white cursor-pointer hover:stroke-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent animate-pulse"
-      :class="[slideCycle === 'next' ? 'animate-shake-down' : 'animate-shake-up']">
-      <IconArrowDown v-if="slideCycle === 'next'" />
-      <IconArrowUp v-else />
-    </button>
+  <div ref="projectsSection" id="projects"
+    class="h-full w-full flex justify-center items-center relative overflow-hidden bg-text text-background">
+
+    <!-- Background Image -->
+    <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+      <img src="/assets/projects-bg.png" alt="projects background" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="absolute inset-0 bg-black/50 opacity-50 pointer-events-none"></div>
 
     <!-- Slider -->
-    <div ref="sliderWrapper" class="w-full h-full overflow-hidden">
+    <div ref="sliderWrapper" class="relative z-10 w-full h-full overflow-hidden py-6">
       <div ref="slider" class="flex flex-col h-full transition-transform duration-500 ease-out"
         :style="{ transform: `translateY(-${currentIndex * 100}%)` }">
         <div v-for="(project, index) in projects" :key="project.id"
@@ -17,22 +18,35 @@
           <ProjectCard :project="project" :isEven="index % 2 === 1" :isActive="index === currentIndex" />
         </div>
       </div>
+
+      <!-- Toggle Button -->
+      <button @click="handleSliding"
+        class="absolute z-20 left-1/2 bottom-4 transform -translate-x-1/2 stroke-white cursor-pointer hover:stroke-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent animate-pulse"
+        :class="[slideCycle === 'next' ? 'animate-shake-down' : 'animate-shake-up']">
+        <IconArrowDown v-if="slideCycle === 'next'" />
+        <IconArrowUp v-else />
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
-import { gsap } from 'gsap'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
 import { useProjectsStore } from '@/stores/projects'
+
 import ProjectCard from '@/components/cards/ProjectCard.vue'
 import IconArrowDown from '@/components/icons/IconArrowDown.vue'
 import IconArrowUp from '@/components/icons/IconArrowUp.vue'
 
 const emit = defineEmits(['slider-active'])
 
+// Import the projects store
 const projects = useProjectsStore().projects
+
+// Refs for DOM elements
 const projectsSection = ref(null)
+const sliderWrapper = ref(null)
 const slider = ref(null)
 
 const currentIndex = ref(0)
@@ -42,11 +56,14 @@ const isSliding = ref(false)
 let startY = 0
 let endY = 0
 
+// Methods to handle sliding
 function lockSliding() {
   isSliding.value = true
   setTimeout(() => (isSliding.value = false), 500)
 }
 
+
+// Handle sliding based on button click
 function handleSliding() {
   if (isSliding.value) return
   lockSliding()
@@ -58,6 +75,8 @@ function handleSliding() {
   }
 }
 
+
+// Handle next slide logic
 function goNext() {
   if (currentIndex.value < projects.length - 1) {
     currentIndex.value++
@@ -66,6 +85,7 @@ function goNext() {
   slideCycle.value = currentIndex.value === projects.length - 1 ? 'prev' : 'next'
 }
 
+// Handle previous slide logic
 function goPrev() {
   if (currentIndex.value > 0) {
     currentIndex.value--
@@ -76,6 +96,7 @@ function goPrev() {
 
 
 // MOUSE WHEEL + KEYBOARD + TOUCH EVENTS
+// Mouse wheel scrolling
 function handleWheel(e) {
   if (isSliding.value) return
 
@@ -108,7 +129,7 @@ function handleWheel(e) {
   lockSliding()
 }
 
-
+// Keyboard navigation
 function handleKey(e) {
   if (isSliding.value) return
 
@@ -118,10 +139,12 @@ function handleKey(e) {
   lockSliding()
 }
 
+// Touch events for mobile
 function handleTouchStart(e) {
   startY = e.touches[0].clientY
 }
 
+// Touch end event
 function handleTouchEnd(e) {
   endY = e.changedTouches[0].clientY
   const deltaY = endY - startY
@@ -137,18 +160,19 @@ function handleTouchEnd(e) {
   }
 }
 
+// Lifecycle hooks
 onMounted(() => {
   projectsSection.value.addEventListener('wheel', handleWheel, { passive: false })
-  window.addEventListener('keydown', handleKey)
   projectsSection.value.addEventListener('touchstart', handleTouchStart)
   projectsSection.value.addEventListener('touchend', handleTouchEnd)
+  window.addEventListener('keydown', handleKey)
 })
 
 onBeforeUnmount(() => {
   projectsSection.value.removeEventListener('wheel', handleWheel)
-  window.removeEventListener('keydown', handleKey)
   projectsSection.value.removeEventListener('touchstart', handleTouchStart)
   projectsSection.value.removeEventListener('touchend', handleTouchEnd)
+  window.removeEventListener('keydown', handleKey)
 })
 </script>
 

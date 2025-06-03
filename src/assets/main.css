@@ -3,12 +3,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #000; /* 47294c */
-  --color-primary-light: #7b4f7a;
-  --color-secondary: #fff; /* c3b9b7 */
-  --color-accent: red;
-  --color-background: #fff;
-  --color-text: #000;
+  --color-primary: #183b4e;
+  --color-secondary: #36A49F;
+  --color-background: #f9f9f6;
+  --color-text: #1f1f1f;
+  --color-accent: #27548a;
+  --color-extra: #f3f3e0;
 
   --font-text: 'DM Sans', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;

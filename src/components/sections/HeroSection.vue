@@ -2,11 +2,33 @@
   <div
     ref="heroSection"
     id="home"
-    class="h-full w-full bg-secondary flex justify-center items-center py-10"
+    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-secondary text-text"
   >
+
+<div
+  class="absolute inset-0 flex justify-end z-0 flex justify-center items-center pointer-events-none"
+  aria-hidden="true"
+>
+  <svg
+    class="w-[700px] h-[700px] opacity-10"
+    viewBox="0 0 600 600"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g transform="translate(300,300)">
+      <path
+        d="M133.5,-148.2C178.1,-111.5,222.4,-55.7,220.9,-2.4C219.4,50.8,172.2,101.6,127.6,143.6C83.1,185.5,41.5,218.6,-9.7,229.3C-60.9,239.9,-121.8,228.2,-162.3,190.1C-202.8,152,-222.9,87.5,-215.2,29.2C-207.5,-29,-172,-81.1,-131.3,-119.3C-90.5,-157.4,-45.2,-181.7,6.8,-188.9C58.9,-196.1,117.7,-186.2,133.5,-148.2Z"
+        fill="#fff"
+      />
+    </g>
+  </svg>
+</div>
+
+
+
+  <!-- Hero content -->
     <div
       ref="heroContent"
-      class="relative z-10 w-full max-h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6 scroll-smooth"
+      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth"
     >
       <h1 class="font-bold uppercase md:text-xl lg:text-2xl">
         Hi, I'm <br />
@@ -125,4 +147,16 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.hero-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23183b4e' fill-opacity='0.5'%3E%3Ccircle cx='20' cy='20' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 40px 40px;
+  background-repeat: repeat;
+}
+
+/* Gradient mask to fade top and bottom */
+.mask-gradient {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+}
+</style>

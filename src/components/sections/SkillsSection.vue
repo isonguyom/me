@@ -1,8 +1,12 @@
 <template>
-  <div id="skills" ref="skillsSection" class="h-full w-full bg-secondary flex justify-center items-center py-10">
+  <div id="skills" ref="skillsSection" class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-background text-text">
+    
+    <!-- Unsplash Background image -->
+
+ 
     <div
       ref="skillsContent"
-      class="relative z-10 w-full h-full overflow-y-auto px-4 md:px-6 lg:px-10 py-6 scroll-smooth max-w-5xl mx-auto"
+      class="relative z-10 w-full h-auto max-h-full overflow-hidden px-4 md:px-6 xl:px-10 max-w-4xl mx-auto"
     >
       <!-- Tabs -->
       <div ref="tabsRef" class="flex flex-wrap gap-3 mb-6">
