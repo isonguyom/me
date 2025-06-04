@@ -1,20 +1,19 @@
 <template>
-  <div
-    ref="articlesSection"
-    id="articles"
-    class="h-screen w-full flex justify-center items-center py-10 bg-white text-black"
-    aria-labelledby="articles-heading"
-    role="region"
-  >
-    <div class="relative z-10 w-full h-full px-4 md:px-6 lg:px-10 py-8">
-       <p v-if="!articles?.length" class="text-center text-lg">No articles available.</p>
+  <div ref="articlesSection" id="articles"
+    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text"
+    aria-labelledby="articles-heading" role="region">
 
-      <div
-        class="w-full h-auto max-h-full overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 custom-scrollbar"
-      >
-        <ArticleCard v-for="(article, index) in articles" :key="article.id" :article="article" />
+    <div class="relative z-10 w-full h-full px-4 md:px-6 xl:px-10 py-4">
+      <p v-if="!articles?.length" class="text-center text-lg">No articles available.</p>
+
+      <div ref="scrollContainer"
+        class="w-full h-auto max-h-full overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 custom-scrollbar">
+        <div v-for="(article, index) in articles" :key="article.id" class="article-card-item">
+          <ArticleCard :article="article" />
+        </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -24,58 +23,77 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import { useArticlesStore } from '@/stores/articles'
+
 import ArticleCard from '@/components/cards/ArticleCard.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Props are not needed here since we are using a store
 const articlesStore = useArticlesStore()
 const articles = articlesStore.articles
+
+// Refs for the scroll container and GSAP context
 const articlesSection = ref(null)
+const scrollContainer = ref(null)
+let ctx // we'll declare it in the correct scope
 
-onMounted(async () => {
-  await nextTick()
-  if (!articlesSection.value) return
+// Handle wheel event to prevent default scrolling behavior
+function handleWheel(e) {
+  const el = scrollContainer.value
+  if (!el) return
 
-  gsap.fromTo(
-    articlesSection.value.querySelector('.grid'),
-    { opacity: 0, y: 50 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: articlesSection.value,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse'
-      }
-    }
-  )
+  const scrollTop = el.scrollTop
+  const maxScroll = el.scrollHeight - el.clientHeight
+  const delta = e.deltaY
+
+  // Scroll up
+  if (delta < 0 && scrollTop > 0) {
+    e.stopPropagation()
+  }
+
+  // Scroll down
+  else if (delta > 0 && scrollTop < maxScroll) {
+    e.stopPropagation()
+  }
+}
+
+onMounted(() => {
+  const el = scrollContainer.value
+  if (el) {
+    el.addEventListener('wheel', handleWheel, { passive: false })
+  }
+
+  ctx = gsap.context(async () => {
+    await nextTick()
+
+    const cards = scrollContainer.value?.querySelectorAll('.article-card-item') || []
+
+    cards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          scroller: scrollContainer.value,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.05,
+        ease: 'power2.out',
+      })
+    })
+  }, scrollContainer)
 })
 
 onBeforeUnmount(() => {
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+  const el = scrollContainer.value
+  if (el) {
+    el.removeEventListener('wheel', handleWheel)
+  }
+  // ctx?.revert()
+  ScrollTrigger.kill() // ensure cleanup
 })
 </script>
 
-
-<style scoped>
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
-
-</style>
+<style scoped></style>

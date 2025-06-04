@@ -18,17 +18,18 @@
     <!-- Project Content -->
     <div
       class="pt-4 lg:p-6 pb-6 xl:px-10 space-y-2 lg:space-y-6 w-full lg:w-1/2 max-h-[50vh] lg:max-h-full overflow-y-auto scroll-smooth">
-      
+
       <div>
-      <div ref="tagsRef" v-if="project.tags?.length" class="flex flex-wrap gap-2">
-          <span v-for="(tag, index) in project.tags" :key="index" class="text-sm lg:text-base font-light capitalize text-white">
+        <div ref="tagsRef" v-if="project.tags?.length" class="flex flex-wrap gap-2">
+          <span v-for="(tag, index) in project.tags" :key="index"
+            class="text-sm lg:text-base font-light capitalize text-white">
             #{{ tag }}
           </span>
         </div>
-      <h3 ref="titleRef" class="text-xl md:text-3xl lg:text-5xl font-bold uppercase text-secondary lg:mt-2">
-        {{ project.title }}
-      </h3>
-    </div>
+        <h3 ref="titleRef" class="text-xl md:text-3xl lg:text-5xl font-bold uppercase text-secondary lg:mt-2">
+          {{ project.title }}
+        </h3>
+      </div>
 
       <p ref="descRef" class="text-sm md:text-base lg:text-xl lg:pr-6 text-pretty opacity-80 mb-2 lg:mb-6">
         {{ project.description }}

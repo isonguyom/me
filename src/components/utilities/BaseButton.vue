@@ -1,21 +1,15 @@
 <template>
-  <button
-    :class="[
-      'inline-flex items-center justify-center font-semibold text-sm uppercase transition-colors duration-300 ease-in-out relative focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
-      variantClass,
-      customClass,
-      disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
-      variant.includes('ghost') ? '' : 'btn hover-slide-up hover:border-accent hover:text-white'
-    ]"
-    :type="type"
-    :disabled="disabled"
-  >
-    <span
-      :class="[
-        'flex gap-x-3 items-center relative inset-0 w-fit',
-        variant.includes('ghost') ? 'p-1' : 'px-6 py-3'
-      ]"
-    >
+  <button :class="[
+    'inline-flex items-center justify-center font-semibold text-sm uppercase transition-colors duration-300 ease-in-out relative focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
+    variantClass,
+    customClass,
+    disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+    variant.includes('ghost') ? '' : 'btn hover-slide-up hover:border-accent hover:text-white'
+  ]" :type="type" :disabled="disabled">
+    <span :class="[
+      'flex gap-x-3 items-center relative inset-0 w-fit',
+      variant.includes('ghost') ? 'p-1' : size === 'sm' ? 'px-2 py-1 text-xs' : 'px-6 py-3'
+    ]">
       <slot />
     </span>
   </button>
@@ -32,6 +26,10 @@ const props = defineProps({
   type: {
     type: String,
     default: 'button',
+  },
+  size: {
+    type: String,
+    default: 'md', // 'sm', 'md', 'lg'
   },
   disabled: Boolean,
   customClass: {
@@ -73,7 +71,8 @@ const variantClass = computed(() => {
   left: 0;
   height: 100%;
   width: 0;
-  background-color: var(--color-accent, #9333ea); /* fallback purple */
+  background-color: var(--color-accent, #9333ea);
+  /* fallback purple */
   content: "";
   transition: width 0.3s ease-out;
   z-index: 0;
@@ -83,7 +82,7 @@ const variantClass = computed(() => {
   width: 100%;
 }
 
-.btn > span {
+.btn>span {
   position: relative;
   z-index: 1;
   transition: color 0.3s ease;
