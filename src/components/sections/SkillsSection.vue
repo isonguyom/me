@@ -1,34 +1,34 @@
 <template>
-  <div id="skills" ref="skillsSection" class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-background text-text">
-    
-    <!-- Unsplash Background image -->
+  <div id="skills" ref="skillsSection"
+    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden text-text">
 
- 
-    <div
-      ref="skillsContent"
-      class="relative z-10 w-full h-auto max-h-full overflow-hidden px-4 md:px-6 xl:px-10 max-w-4xl mx-auto"
-    >
+    <!-- Background Image -->
+    <div class="absolute inset-0 flex justify-center items-center pointer-events-none z-0">
+      <img src="/assets/skills-bg.jpg" alt="projects background" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="absolute inset-0 bg-black/30 backdrop-blur-sm pointer-events-none"></div>
+
+    <div ref="skillsContent" class="relative z-10 w-full h-full px-4 md:px-6 xl:px-10 max-w-4xl mx-auto">
       <!-- Tabs -->
-      <div ref="tabsRef" class="flex flex-wrap gap-3 mb-6">
-        <button
-          v-for="(tab, index) in skills"
-          :key="tab.category"
-          @click="changeTab(index)"
-          class="px-4 py-2 rounded-full font-medium transition duration-300"
-          :class="activeTab === index ? 'bg-primary text-white' : 'bg-white text-primary hover:bg-primary hover:text-white'"
-        >
+      <div ref="tabsRef" class="flex flex-wrap gap-2 mb-4 py-2 w-full">
+        <button ref="tabButtonRefs" v-for="(tab, index) in skills" :key="tab.category" @click="changeTab(index)" role="tab"
+          :aria-selected="activeTab === index" :aria-controls="`panel-${index}`"
+          class="px-4 py-2 font-medium transition duration-300 cursor-pointer min-w-max text-sm md:text-base"
+          :class="activeTab === index ? 'bg-primary text-white' : 'bg-white text-primary hover:bg-accent hover:text-white'">
           {{ tab.category }}
         </button>
       </div>
 
       <!-- Skills List -->
-      <div ref="skillsBox" class="bg-white text-primary p-6 rounded-lg shadow-md space-y-2">
-        <h2 class="text-xl font-semibold mb-2">{{ skills[activeTab].category }}</h2>
-        <ul class="list-disc list-inside space-y-1">
+      <div ref="skillsBox" class="bg-white text-text p-6 shadow-md space-y-2">
+        <!-- <h2 class="text-xl font-semibold mb-2">{{ skills[activeTab].category }}</h2> -->
+        <ul class="list-disc list-inside space-y-1 text-lg md:text-xl" :id="`panel-${activeTab}`" role="tabpanel">
           <li v-for="(item, i) in skills[activeTab].skills" :key="item" :ref="el => skillItems[i] = el">
             {{ item }}
           </li>
         </ul>
+
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@ const activeTab = ref(0)
 const skillsSection = ref(null)
 const skillsContent = ref(null)
 const tabsRef = ref(null)
+const tabButtonRefs = ref([])
 const skillsBox = ref(null)
 const skillItems = ref([])
 
@@ -94,23 +95,45 @@ const animateIn = () => {
 }
 
 const changeTab = async (index) => {
+  // Animate out
+  await gsap.to(skillItems.value, {
+    opacity: 0,
+    y: 10,
+    duration: 0.3,
+    stagger: 0.05,
+    ease: 'power2.in',
+  })
+
   activeTab.value = index
+  skillItems.value = []
   await nextTick()
+
+  // Animate in
   animateIn()
 }
 
-onMounted(() => {
+
+
+onMounted(async () => {
+  await nextTick()
+
+  tabButtonRefs.value = []
+
   // Animate tab buttons
-  gsap.from(tabsRef.value.children, {
-    opacity: 0,
-    y: 30,
-    duration: 0.5,
-    stagger: 0.1,
-    scrollTrigger: {
-      trigger: skillsSection.value,
-      start: 'top 85%',
-    },
-  })
+ ScrollTrigger.batch(tabButtonRefs.value, {
+      onEnter: (batch) =>
+        gsap.from(batch, {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power2.out',
+        }),
+      start: 'top 90%',
+      once: true,
+    })
+
+
 
   // Animate container
   gsap.from(skillsBox.value, {

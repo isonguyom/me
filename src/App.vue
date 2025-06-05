@@ -68,7 +68,7 @@ const tlDefaults = { ease: 'slow.inOut', duration: 1.25 }
 // Compute isDarkBg based on the current section
 const isDarkBg = computed(() => {
   const currentSection = sectionsList[current.value]
-   const darkSections = ['projects', 'contact']
+   const darkSections = ['skills', 'projects', 'contact']
   return darkSections.includes(currentSection.class);
 })
 
