@@ -7,7 +7,7 @@
       <img src="/assets/projects-bg.png" alt="projects background" class="w-full h-full object-cover" />
     </div>
 
-    <div class="absolute inset-0 bg-black/50 opacity-50 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
 
     <!-- Slider -->
     <div ref="sliderWrapper" class="relative z-10 w-full h-full overflow-hidden py-6">

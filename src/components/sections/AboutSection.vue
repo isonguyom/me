@@ -1,13 +1,8 @@
 <template>
-  <div
-    ref="aboutSection"
-    id="about"
-    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text"
-  >
-    <div
-      ref="aboutContent"
-      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth max-w-4xl mx-auto"
-    >
+  <div ref="aboutSection" id="about"
+    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text">
+    <div ref="aboutContent"
+      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth max-w-4xl mx-auto">
       <article class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 text-balance">
         <p class="text-justify">
           I'm <strong>Martin Isonguyo</strong>, a front-end developer with experience in building modern and

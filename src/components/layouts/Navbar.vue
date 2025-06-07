@@ -3,7 +3,7 @@
         <div
             :class="['flex justify-between items-center w-full p-4 md:px-6 z-50', darkBg ? 'text-white' : 'text-black']">
             <!-- Logo and Title -->
-            <div class="flex items-center gap-2 z-50">
+            <div class="flex items-center gap-2">
                 <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span>
                 <h1 ref="sectionTitleRef" id="site-title"
                     class="uppercase md:text-lg tracking-wider transition-all duration-500">{{ sectionTitle }}</h1>
@@ -19,41 +19,47 @@
 
         <!-- Expanding Circle Background -->
         <div ref="bgCircle"
-            class="fixed top-0 right-0 w-[100px] h-[100px] max-w-[520px] max-h-screen bg-primary scale-0 z-10 pointer-events-none">
+            class="fixed top-0 right-0 w-[100px] h-[100px] max-w-[450px] max-h-screen bg-primary scale-0 z-10 pointer-events-none">
         </div>
 
         <!-- Accessible Navigation Menu -->
         <nav v-show="isMenuVisible" ref="menu" id="menu"
-            class="navbar fixed top-0 right-0 h-screen w-full max-w-[520px] px-4 md:px-6 py-6 text-white flex-col justify-center gap-y-8 z-20"
+            class="navbar fixed top-0 right-0 h-screen w-full max-w-[450px] px-4 md:px-6 py-4 text-white flex-col justify-center gap-y-4 z-20"
             role="navigation" aria-labelledby="site-title">
-            <ul
-                class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mt-6 menu-items mx-auto">
-                <li v-for="(item, index) in menuItems" :key="item">
-                    <button @click="handleGoTo(index)" :class="[
-                        'hover:text-accent uppercase border-b-2 pr-5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
-                        activeIndex === index ? 'text-accent border-accent' : 'text-white border-white/0'
-                    ]" role="button" tabindex="0" :aria-current="activeIndex === index ? 'page' : null">
-                        {{ item }}
-                    </button>
-                </li>
-
-            </ul>
-
-            <!-- Footer Content -->
-            <div class="flex justify-between items-end gap-3 flex-wrap sm:gap-6 w-full pointer-events-auto mt-10">
-                <div class="text-sm sm:text-base font-light">
-                    <p><span class="font-semibold">Phone:</span> +2348022475918</p>
-                    <p><span class="font-semibold">Email:</span> isonguyombiz@gmail.com</p>
-                </div>
-
-                <ul class="flex space-x-2 font-bold text-lg socials">
-                    <li v-for="social in socials" :key="social.label">
-                        <a :href="social.href" target="_blank" rel="noopener noreferrer" :title="social.name"
-                            class="font-heading uppercase p-1 text-white hover:text-accent transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
-                                social.label }}</a>
+            <div>
+                <ul
+                    class="space-y-4 text-3xl font-semibold overflow-y-auto pointer-events-auto h-auto max-h-2/3 w-full max-w-3xs py-6 mt-6 menu-items">
+                    <li v-for="(item, index) in menuItems" :key="item">
+                        <button @click="handleGoTo(index)" :class="[
+                            'uppercase border-b-2 pr-5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
+                            activeIndex === index ? 'text-secondary border-secondary' : 'text-white border-white/0 hover:text-secondary'
+                        ]" role="button" tabindex="0" :aria-current="activeIndex === index ? 'page' : null">
+                            {{ item }}
+                        </button>
                     </li>
+
                 </ul>
 
+                <!-- Footer Content -->
+                <div class="flex flex-col justify-between gap-3 sm:gap-4 w-full pointer-events-auto mt-10">
+                    <address class="not-italic text-white space-y-1 text-sm sm:text-base font-light">
+                        <p><span class="font-semibold">Phone:</span> <a href="tel:+2348022475918"
+                                class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300">+2348022475918</a>
+                        </p>
+                        <p><span class="font-semibold">Email:</span> <a href="mailto:isonguyombiz@gmail.com"
+                                class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300">isonguyombiz@gmail.com</a>
+                        </p>
+                    </address>
+
+                    <ul class="flex space-x-2 font-bold text-lg socials">
+                        <li v-for="social in socials" :key="social.label">
+                            <a :href="social.href" target="_blank" rel="noopener noreferrer" :title="social.name"
+                                class="font-heading uppercase p-1 text-white hover:text-secondary transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
+                                    social.label }}</a>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
         </nav>
     </header>
@@ -69,6 +75,7 @@ const props = defineProps({
         type: Number,
         default: 0
     },
+    isScrolling: Boolean
 })
 const emit = defineEmits(['goTo', 'toggle-nav'])
 

@@ -7,13 +7,13 @@
       <img src="/assets/skills-bg.jpg" alt="projects background" class="w-full h-full object-cover" />
     </div>
 
-    <div class="absolute inset-0 bg-black/30 backdrop-blur-sm pointer-events-none"></div>
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-xs pointer-events-none"></div>
 
     <div ref="skillsContent" class="relative z-10 w-full h-full px-4 md:px-6 xl:px-10 max-w-4xl mx-auto">
       <!-- Tabs -->
       <div ref="tabsRef" class="flex flex-wrap gap-2 mb-4 py-2 w-full">
-        <button ref="tabButtonRefs" v-for="(tab, index) in skills" :key="tab.category" @click="changeTab(index)" role="tab"
-          :aria-selected="activeTab === index" :aria-controls="`panel-${index}`"
+        <button ref="tabButtonRefs" v-for="(tab, index) in skills" :key="tab.category" @click="changeTab(index)"
+          role="tab" :aria-selected="activeTab === index" :aria-controls="`panel-${index}`"
           class="px-4 py-2 font-medium transition duration-300 cursor-pointer min-w-max text-sm md:text-base"
           :class="activeTab === index ? 'bg-primary text-white' : 'bg-white text-primary hover:bg-accent hover:text-white'">
           {{ tab.category }}
@@ -21,7 +21,7 @@
       </div>
 
       <!-- Skills List -->
-      <div ref="skillsBox" class="bg-white text-text p-6 shadow-md space-y-2">
+      <div ref="skillsBox" class="bg-white text-text p-6 shadow-lg space-y-2 md:space-y-4">
         <!-- <h2 class="text-xl font-semibold mb-2">{{ skills[activeTab].category }}</h2> -->
         <ul class="list-disc list-inside space-y-1 text-lg md:text-xl" :id="`panel-${activeTab}`" role="tabpanel">
           <li v-for="(item, i) in skills[activeTab].skills" :key="item" :ref="el => skillItems[i] = el">
@@ -120,18 +120,18 @@ onMounted(async () => {
   tabButtonRefs.value = []
 
   // Animate tab buttons
- ScrollTrigger.batch(tabButtonRefs.value, {
-      onEnter: (batch) =>
-        gsap.from(batch, {
-          opacity: 0,
-          y: 20,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power2.out',
-        }),
-      start: 'top 90%',
-      once: true,
-    })
+  ScrollTrigger.batch(tabButtonRefs.value, {
+    onEnter: (batch) =>
+      gsap.from(batch, {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power2.out',
+      }),
+    start: 'top 90%',
+    once: true,
+  })
 
 
 

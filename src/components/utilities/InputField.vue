@@ -8,7 +8,8 @@
             'border-black/10 hover:border-accent transition-all focus:outline-none focus:ring-2 focus:ring-primary',
             error ? 'border-red-500' : '',
             inputClass
-        ]" @input="$emit('update:modelValue', $event.target.value)" />
+        ]" @input="$emit('update:modelValue', $event.target.value)" :aria-invalid="!!error"
+            :aria-describedby="error ? `${id}-error` : null" />
         <p v-if="error" class="mt-1 text-sm text-red-500">{{ error }}</p>
     </div>
 </template>

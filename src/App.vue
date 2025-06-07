@@ -1,6 +1,6 @@
 <template>
   <main id="mainWrapper" ref="container" tabindex="0" class="w-[100vw] h-screen overflow-hidden relative">
-    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" :darkBg="isDarkBg" />
+    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" :darkBg="isDarkBg" :is-scrolling="scrolling" />
     <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" :darkBg="isDarkBg" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
@@ -71,6 +71,25 @@ const isDarkBg = computed(() => {
    const darkSections = ['skills', 'projects', 'contact']
   return darkSections.includes(currentSection.class);
 })
+
+// Compute scrolling state if there is a scrolling on the page
+const scrolling = computed(() => {
+  const section = sections.value[current.value];
+  if (!section) return false;
+
+  // Check if the section itself requires scrolling
+  if (section.scrollHeight > window.innerHeight) return true;
+
+  // Check if any child of the section requires scrolling
+  const children = section.children || [];
+  for (const child of children) {
+    if (child.scrollHeight > window.innerHeight) {
+      return true;
+    }
+  }
+
+  return false;
+});
 
 
 let isTransitioning = false // ✅ (2) Navigation lock
@@ -310,7 +329,7 @@ window.addEventListener('popstate', () => {
 
 onMounted(() => {
   container.value.focus()
-  sections.value = container.value.querySelectorAll('section')
+  sections.value = container.value.querySelectorAll('.section')
   images.value = gsap.utils.toArray(container.value.querySelectorAll('.bg'))
   outerWrappers.value = gsap.utils.toArray(container.value.querySelectorAll('.outer'))
   innerWrappers.value = gsap.utils.toArray(container.value.querySelectorAll('.inner'))
@@ -361,7 +380,7 @@ onUnmounted(() => {
 
 
 <style scoped>
-section {
+.section {
   height: 100%;
   width: 100%;
   top: 0;
@@ -370,7 +389,7 @@ section {
   will-change: auto;
 }
 
-section.active {
+.section.active {
   visibility: visible;
 }
 
