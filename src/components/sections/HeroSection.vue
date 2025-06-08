@@ -1,35 +1,18 @@
 <template>
-  <div
-    ref="heroSection"
-    id="home"
-    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-secondary text-text"
-  >
+  <div ref="heroSection" id="home"
+    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-secondary text-text">
 
-<div
-  class="absolute inset-0 flex justify-end z-0 flex justify-center items-center pointer-events-none"
-  aria-hidden="true"
->
-  <svg
-    class="w-[700px] h-[700px] opacity-10"
-    viewBox="0 0 600 600"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g transform="translate(300,300)">
-      <path
-        d="M133.5,-148.2C178.1,-111.5,222.4,-55.7,220.9,-2.4C219.4,50.8,172.2,101.6,127.6,143.6C83.1,185.5,41.5,218.6,-9.7,229.3C-60.9,239.9,-121.8,228.2,-162.3,190.1C-202.8,152,-222.9,87.5,-215.2,29.2C-207.5,-29,-172,-81.1,-131.3,-119.3C-90.5,-157.4,-45.2,-181.7,6.8,-188.9C58.9,-196.1,117.7,-186.2,133.5,-148.2Z"
-        fill="#fff"
-      />
-    </g>
-  </svg>
-</div>
+    <!-- Background image -->
+    <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-10">
+      <img src="/assets/hero-bg.png" alt="projects background" class="w-full h-full object-cover opacity-40" />
+    </div>
+
+    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
 
 
-
-  <!-- Hero content -->
-    <div
-      ref="heroContent"
-      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth"
-    >
+    <!-- Hero content -->
+    <div ref="heroContent"
+      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth">
       <h1 class="font-bold uppercase md:text-xl lg:text-2xl">
         Hi, I'm <br />
         <span ref="splitTextEl" class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
@@ -118,28 +101,28 @@ onMounted(() => {
     ease: "power2.out",
   })
 
-  // Then animate paragraph
-  .from(
-    heroContent.value.querySelector("p"),
-    {
-      y: 30,
-      autoAlpha: 0,
-      duration: 0.8,
-    },
-    ">0.2" // start 0.2 seconds after letters finish
-  )
+    // Then animate paragraph
+    .from(
+      heroContent.value.querySelector("p"),
+      {
+        y: 30,
+        autoAlpha: 0,
+        duration: 0.8,
+      },
+      ">0.2" // start 0.2 seconds after letters finish
+    )
 
-  // Then animate buttons
-  .from(
-    heroContent.value.querySelectorAll("button"),
-    {
-      y: 20,
-      autoAlpha: 0,
-      duration: 0.6,
-      stagger: 0.2,
-    },
-    ">0.1" // start 0.1 seconds after paragraph animation starts
-  );
+    // Then animate buttons
+    .from(
+      heroContent.value.querySelectorAll("button"),
+      {
+        y: 20,
+        autoAlpha: 0,
+        duration: 0.6,
+        stagger: 0.2,
+      },
+      ">0.1" // start 0.1 seconds after paragraph animation starts
+    );
 });
 
 onUnmounted(() => {

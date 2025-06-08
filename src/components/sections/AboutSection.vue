@@ -1,6 +1,15 @@
 <template>
   <div ref="aboutSection" id="about"
     class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text">
+
+
+    <!-- Background Image -->
+    <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+      <img src="/assets/about-bg.png" alt="about background" class="w-full h-full object-cover opacity-20" />
+    </div>
+    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
+
     <div ref="aboutContent"
       class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth max-w-4xl mx-auto">
       <article class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 text-balance">
@@ -13,7 +22,7 @@
 
         <p class="text-justify">
           With a background in marine engineering, I’m especially interested in driving <strong>digital
-            transformation in the maritime industry</strong> — using smart, efficient solutions to bridge
+            transformation in the maritime industry</strong> using smart, efficient solutions to bridge
           the gap between industry and innovation.
         </p>
 

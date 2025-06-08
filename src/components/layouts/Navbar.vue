@@ -53,7 +53,8 @@
 
                     <ul class="flex space-x-2 font-bold text-lg socials">
                         <li v-for="social in socials" :key="social.label">
-                            <a :href="social.href" target="_blank" rel="noopener noreferrer" :title="social.name"
+                            <a :href="`https://${social.href}`" target="_blank" rel="noopener noreferrer"
+                                :title="social.name"
                                 class="font-heading uppercase p-1 text-white hover:text-secondary transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">{{
                                     social.label }}</a>
                         </li>
@@ -94,10 +95,10 @@ const sectionTitleRef = ref('')
 
 const menuItems = ['Home', 'About Me', 'Skills', 'My Works', 'Articles', 'Contact Me']
 const socials = [
-    { label: 'GH.', name: 'Github', href: '#' },
-    { label: 'LI.', name: 'LinkedIn', href: '#' },
-    { label: 'TW.', name: 'Twitter', href: '#' },
-    { label: 'BE.', name: 'Behance', href: '#' }
+    { label: 'GH.', name: 'Github', href: 'github.com/isonguyom' },
+    { label: 'LI.', name: 'LinkedIn', href: 'linkedin.com/in/martin-isonguyo/' },
+    { label: 'TW.', name: 'Twitter', href: 'x.com/IsonguyoM' },
+    { label: 'BE.', name: 'Behance', href: 'behance.net/martinisonguyo' }
 ]
 
 let openTimeline = null

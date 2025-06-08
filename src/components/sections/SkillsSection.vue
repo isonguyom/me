@@ -4,7 +4,7 @@
 
     <!-- Background Image -->
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none z-0">
-      <img src="/assets/skills-bg.jpg" alt="projects background" class="w-full h-full object-cover" />
+      <img src="/assets/skills-bg.png" alt="projects background" class="w-full h-full object-cover" />
     </div>
 
     <div class="absolute inset-0 bg-black/40 backdrop-blur-xs pointer-events-none"></div>
