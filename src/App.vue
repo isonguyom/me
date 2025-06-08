@@ -1,6 +1,7 @@
 <template>
   <main id="mainWrapper" ref="container" tabindex="0" class="w-[100vw] h-screen overflow-hidden relative">
-    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" :darkBg="isDarkBg" :is-scrolling="scrolling" />
+    <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" :darkBg="isDarkBg"
+      :is-scrolling="scrolling" />
     <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" :darkBg="isDarkBg" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
@@ -11,7 +12,8 @@
         <div class="outer">
           <div class="inner">
             <div class="bg">
-              <component :is="Component.component" :key="Component.id" @go-to="goToSection" @slider-active="isSliderActive = $event" />
+              <component :is="Component.component" :key="Component.id" @go-to="goToSection"
+                @slider-active="isSliderActive = $event" />
             </div>
           </div>
         </div>
@@ -68,7 +70,7 @@ const tlDefaults = { ease: 'slow.inOut', duration: 1.25 }
 // Compute isDarkBg based on the current section
 const isDarkBg = computed(() => {
   const currentSection = sectionsList[current.value]
-   const darkSections = ['skills', 'projects', 'contact']
+  const darkSections = ['skills', 'projects', 'contact']
   return darkSections.includes(currentSection.class);
 })
 
