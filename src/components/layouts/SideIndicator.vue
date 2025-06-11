@@ -1,6 +1,6 @@
 <template>
     <!-- Side indicator -->
-    <nav ref="sideIndicator"
+    <nav v-show="hideEl" ref="sideIndicator"
         class="fixed top-1/2 right-2 transform -translate-y-1/2 flex flex-col gap-2 z-10 pointer-events-none">
         <button v-for="(section, index) in sectionsCount" :key="index" @click="handleGoTo(index)" :title="titles[index]"
             :aria-label="`Go to section ${index + 1}`" :class="[
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import gsap from 'gsap'
 
 const props = defineProps({
@@ -24,6 +24,10 @@ const props = defineProps({
         required: true
     },
     darkBg: {
+        type: Boolean,
+        default: false
+    },
+    hideEl: {
         type: Boolean,
         default: false
     }
@@ -41,8 +45,10 @@ const handleGoTo = (index) => {
     emit('goTo', index)
 }
 
-onMounted(() => {
-    if (sideIndicator.value) {
+
+// watch for every true occurrence of hideEl prop to animate the side indicator
+watch(() => props.hideEl, (newVal) => {
+    if (newVal && sideIndicator.value) {
         gsap.from(sideIndicator.value, { x: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.8 })
     }
 })

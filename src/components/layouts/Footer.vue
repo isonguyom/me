@@ -1,5 +1,5 @@
 <template>
-    <footer ref="footer" :class="[
+    <footer v-show="hideEl" ref="footer" :class="[
         'bg-transparent p-4 md:px-6 z-40 fixed bottom-0 w-full pointer-events-none',
         darkBg ? 'text-white stroke-white' : 'text-black stroke-black'
     ]">
@@ -36,13 +36,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import gsap from 'gsap'
 
 import IconArrowRight from '@/components/icons/IconArrowRight.vue'
 import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
 
-defineProps({
+const props = defineProps({
     index: {
         type: Number,
         required: true
@@ -52,6 +52,10 @@ defineProps({
         required: true
     },
     darkBg: {
+        type: Boolean,
+        default: false
+    },
+    hideEl: {
         type: Boolean,
         default: false
     }
@@ -65,9 +69,9 @@ const handleGoTo = (ind) => {
     emit('goTo', ind)
 }
 
-onMounted(() => {
-
-    if (footer.value) {
+// watch for every true occurrence of hideEl prop to animate the footer
+watch(() => props.hideEl, (newVal) => {
+    if (newVal && footer.value) {
         gsap.from(footer.value, { y: 80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.6 })
     }
 })

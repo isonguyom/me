@@ -8,7 +8,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Vivstock",
-      image: "assets/vivstock.png",
+      image: "assets/vivstock.gif",
       link: "https://vivstock.com",
       tags: ['Auth pages', 'Dashboard'],
       description: "A stock trading platform that allows users to buy and sell stocks. Responsible for building the auth pages and dashboard(user and admin) frontend",
@@ -32,7 +32,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Angel's Pastries Services",
-      image: "assets/angel.png",
+      image: "assets/angel.gif",
       link: "",
       tags: ['Logo'],
       description: "Angel's Pastries Services is a bakery that specializes in cakes and pastries. ",
@@ -40,7 +40,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Tiptop Design Agency",
-      image: "assets/tiptop.png",
+      image: "assets/tiptop.gif",
       link: "https://tiptopdesign.netlify.app",
       tags: ['Website', 'Logo', 'UI design'],
       description: "This is website for a design agency that showcases their services and portfolio.",

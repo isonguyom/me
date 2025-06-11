@@ -1,8 +1,9 @@
 <template>
   <main id="mainWrapper" ref="container" tabindex="0" class="w-[100vw] h-screen overflow-hidden relative">
     <Navbar :currentIndex="current" @go-to="goToSection" @toggle-nav="isNavActive = $event" :darkBg="isDarkBg"
-      :is-scrolling="scrolling" />
-    <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" :darkBg="isDarkBg" />
+      :hide-el="listening" :is-scrolling="scrolling" />
+    <SideIndicator :sections-count="sectionsCount" :current="current" @go-to="goToSection" :darkBg="isDarkBg"
+      :hide-el="listening" />
 
     <template v-for="(Component, index) in sectionsList" :key="index">
       <section :class="['section', Component.class, current === index ? 'active' : '']" :id="Component.id"
@@ -21,7 +22,7 @@
     </template>
 
 
-    <Footer :index="current" :total="sectionsCount" @go-to="goToSection" :darkBg="isDarkBg" />
+    <Footer :index="current" :total="sectionsCount" @go-to="goToSection" :darkBg="isDarkBg" :hide-el="listening" />
   </main>
 </template>
 
@@ -303,15 +304,16 @@ watch(
       for (let i = 0; i < sections.value.length; i++) {
         gsap.set(sections.value[i], { pointerEvents: 'none' })
       }
-      listening.value = false
     } else {
       for (let i = 0; i < sections.value.length; i++) {
         gsap.set(sections.value[i], { pointerEvents: 'auto' })
       }
-      listening.value = true
     }
   }
 )
+
+// watch for to hide layout elements before transition 
+
 
 watchEffect(() => {
   if (!initialLoad.value) {
