@@ -6,7 +6,7 @@
             <!-- Logo and Title -->
             <div class="flex items-center gap-2">
 
-                <div ref="logo" :class="['w-[45px] h-[45px] lg:w-[60px] lg:h-[60px] rounded-full flex justify-center items-center', darkBg ? 'bg-white p-2 lg:p-3 shadow-md' : 'bg-white/0']">
+                <div ref="logo" :class="['w-[45px] h-[45px] lg:w-[60px] lg:h-[60px] rounded-full flex justify-center items-center bg-white p-2 lg:p-3 shadow-md']">
 
                     <!-- <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span> -->
                     <img :src="'assets/logo.svg'" alt="My logo" class="w-full h-full" />
