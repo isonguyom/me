@@ -5,11 +5,14 @@
             :class="['flex justify-between items-center w-full p-4 md:px-6 z-50', darkBg ? 'text-white' : 'text-black']">
             <!-- Logo and Title -->
             <div class="flex items-center gap-2">
-                <!-- <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span> -->
-                <img ref="logo" :src="darkBg ? 'assets/logo_white.svg' : 'assets/logo.svg'" alt="My logo"
-                    class="w-[30px] md:w-[40px] h-auto" />
+
+                <div ref="logo" :class="['w-[45px] h-[45px] lg:w-[60px] lg:h-[60px] rounded-full flex justify-center items-center', darkBg ? 'bg-white p-2 lg:p-3 shadow-md' : 'bg-white/0']">
+
+                    <!-- <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span> -->
+                    <img :src="'assets/logo.svg'" alt="My logo" class="w-full h-full" />
+                </div>
                 <h1 ref="sectionTitleRef" id="site-title"
-                    class="uppercase font-thin text-sm md:text-base lg:text-lg tracking-wider transition-all duration-500">
+                    class="uppercase font-light text-sm md:text-base lg:text-lg tracking-wider transition-all duration-500">
                     {{ sectionTitle }}</h1>
             </div>
 

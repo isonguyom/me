@@ -1,10 +1,10 @@
 <template>
   <div ref="heroSection" id="home"
-    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-secondary text-text">
+    class="h-full w-full flex justify-center items-center py-14 relative overflow-hidden bg-secondary text-text">
 
     <!-- Background image -->
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20">
-      <img src="/assets/hero-bg.png" alt="projects background" class="w-full h-full object-cover" /> 
+      <img src="/assets/hero-bg.png" alt="projects background" class="w-full h-full object-cover" />
     </div>
 
     <div class="absolute inset-0 bg-white/20 pointer-events-none"></div>

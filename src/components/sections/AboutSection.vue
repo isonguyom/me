@@ -1,6 +1,6 @@
 <template>
   <div ref="aboutSection" id="about"
-    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text">
+    class="h-full w-full flex justify-center items-center py-14 relative overflow-hidden bg-white text-text">
 
     <!-- Top right pattern -->
     <div class="absolute top-0 right-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -50,9 +50,35 @@ gsap.registerPlugin(ScrollTrigger)
 const aboutSection = ref(null)
 const aboutContent = ref(null)
 
+
+// Handle wheel event to prevent default scrolling behavior
+function handleWheel(e) {
+  const el = aboutContent.value
+  if (!el) return
+
+  const scrollTop = el.scrollTop
+  const maxScroll = el.scrollHeight - el.clientHeight
+  const delta = e.deltaY
+
+  // Scroll up
+  if (delta < 0 && scrollTop > 0) {
+    e.stopPropagation()
+  }
+
+  // Scroll down
+  else if (delta > 0 && scrollTop < maxScroll) {
+    e.stopPropagation()
+  }
+}
+
 onMounted(() => {
+  const el = aboutContent.value
+  if (el) {
+    el.addEventListener('wheel', handleWheel, { passive: false })
+  }
+
   gsap.fromTo(
-    aboutContent.value,
+    el,
     { opacity: 0, y: 50 },
     {
       opacity: 1,
@@ -66,5 +92,12 @@ onMounted(() => {
       },
     }
   )
+})
+
+onBeforeUnmount(() => {
+  const el = aboutContent.value
+  if (el) {
+    el.removeEventListener('wheel', handleWheel)
+  }
 })
 </script>

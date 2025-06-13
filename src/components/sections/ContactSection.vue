@@ -1,15 +1,15 @@
 <template>
   <div ref="contactSection"
-    class="h-full w-full flex justify-center items-center py-12 relative bg-primary bg-gradient-to-br from-primary to-black/60 text-background"
+    class="h-full w-full flex justify-center items-center py-14 relative bg-primary bg-gradient-to-br from-primary to-black/60 text-background"
     id="contact">
 
-    
+
     <!-- Top right pattern -->
- <div class="absolute top-0 right-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
+    <div class="absolute top-0 right-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
       <img src="/assets/top-right.svg" alt="about background" class="w-full opacity-10" />
     </div>
 
-    <!-- Bottom Left pattern --> 
+    <!-- Bottom Left pattern -->
     <div class="absolute bottom-0 left-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
       <img src="/assets/bottom-left.svg" alt="about background" class="w-full opacity-10" />
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div ref="articlesSection" id="articles"
-    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text"
+    class="h-full w-full flex justify-center items-center py-14 relative overflow-hidden bg-white text-text"
     aria-labelledby="articles-heading" role="region">
 
     <div class="relative z-10 w-full h-full px-4 md:px-6 xl:px-10 py-4">
@@ -91,8 +91,8 @@ onBeforeUnmount(() => {
   if (el) {
     el.removeEventListener('wheel', handleWheel)
   }
-  ctx?.revert()
-  ScrollTrigger.kill() // ensure cleanup
+  // ctx?.revert()
+  // ScrollTrigger.kill() // ensure cleanup
 })
 </script>
 

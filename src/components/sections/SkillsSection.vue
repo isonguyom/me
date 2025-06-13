@@ -1,6 +1,6 @@
 <template>
   <div id="skills" ref="skillsSection"
-    class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden text-text">
+    class="h-full w-full flex justify-center items-center py-16 relative overflow-hidden text-text">
 
     <!-- Background Image -->
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none z-0">

@@ -10,7 +10,7 @@
     <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
 
     <!-- Slider -->
-    <div ref="sliderWrapper" class="relative z-10 w-full h-full overflow-hidden py-6">
+    <div ref="sliderWrapper" class="relative z-10 w-full h-full overflow-hidden py-8">
       <div ref="slider" class="flex flex-col h-full transition-transform duration-500 ease-out"
         :style="{ transform: `translateY(-${currentIndex * 100}%)` }">
         <div v-for="(project, index) in projects" :key="project.id"
