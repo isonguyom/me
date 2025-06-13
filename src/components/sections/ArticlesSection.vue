@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
   if (el) {
     el.removeEventListener('wheel', handleWheel)
   }
-  // ctx?.revert()
+  ctx?.revert()
   ScrollTrigger.kill() // ensure cleanup
 })
 </script>

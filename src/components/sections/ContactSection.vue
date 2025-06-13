@@ -1,7 +1,20 @@
 <template>
   <div ref="contactSection"
-    class="h-full w-full flex justify-center items-center py-12 bg-primary bg-gradient-to-br from-primary to-black/60 text-background"
+    class="h-full w-full flex justify-center items-center py-12 relative bg-primary bg-gradient-to-br from-primary to-black/60 text-background"
     id="contact">
+
+    
+    <!-- Top right pattern -->
+ <div class="absolute top-0 right-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
+      <img src="/assets/top-right.svg" alt="about background" class="w-full opacity-10" />
+    </div>
+
+    <!-- Bottom Left pattern --> 
+    <div class="absolute bottom-0 left-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
+      <img src="/assets/bottom-left.svg" alt="about background" class="w-full opacity-10" />
+    </div>
+
+    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
 
     <div ref="scrollContainer"
       class="relative z-10 w-full max-w-3xl lg:max-w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth custom-scrollbar">

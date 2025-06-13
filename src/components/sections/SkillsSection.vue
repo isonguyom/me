@@ -7,7 +7,7 @@
       <img src="/assets/skills-bg.png" alt="projects background" class="w-full h-full object-cover" />
     </div>
 
-    <div class="absolute inset-0 bg-black/40 backdrop-blur-xs pointer-events-none"></div>
+    <div class="absolute inset-0 bg-black/20 pointer-events-none backdrop-brightness-50"></div>
 
     <div ref="skillsContent" class="relative z-10 w-full h-full px-4 md:px-6 xl:px-10 max-w-4xl mx-auto">
       <!-- Tabs -->

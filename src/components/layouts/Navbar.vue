@@ -1,14 +1,16 @@
 <template>
-    <header v-show="hideEl" ref="navbar" class="fixed top-0 right-0 w-full bg-transparent text-white z-50 pointer-events-none">
+    <header v-show="hideEl" ref="navbar"
+        class="fixed top-0 right-0 w-full bg-transparent text-white z-50 pointer-events-none">
         <div
             :class="['flex justify-between items-center w-full p-4 md:px-6 z-50', darkBg ? 'text-white' : 'text-black']">
             <!-- Logo and Title -->
             <div class="flex items-center gap-2">
                 <!-- <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span> -->
-                <img ref="logo" :src="darkBg ? 'assets/logo_white.svg' : 'assets/logo_black.svg'" alt="My logo"
+                <img ref="logo" :src="darkBg ? 'assets/logo_white.svg' : 'assets/logo.svg'" alt="My logo"
                     class="w-[30px] md:w-[40px] h-auto" />
                 <h1 ref="sectionTitleRef" id="site-title"
-                    class="uppercase md:text-lg tracking-wider transition-all duration-500">{{ sectionTitle }}</h1>
+                    class="uppercase font-thin text-sm md:text-base lg:text-lg tracking-wider transition-all duration-500">
+                    {{ sectionTitle }}</h1>
             </div>
 
             <!-- Hamburger Button -->
@@ -271,7 +273,7 @@ const handleResize = debounce(() => {
 watch(() => props.hideEl, (newVal) => {
     if (newVal && navbar.value) {
         gsap.from(navbar.value, { y: -80, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.5 })
-    } 
+    }
 })
 
 

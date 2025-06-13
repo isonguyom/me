@@ -2,12 +2,17 @@
   <div ref="aboutSection" id="about"
     class="h-full w-full flex justify-center items-center py-12 relative overflow-hidden bg-white text-text">
 
-
-    <!-- Background Image -->
-    <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
-      <img src="/assets/about-bg.png" alt="about background" class="w-full h-full object-cover opacity-20" />
+    <!-- Top right pattern -->
+    <div class="absolute top-0 right-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
+      <img src="/assets/top-right.svg" alt="about background" class="w-full opacity-20" />
     </div>
-    <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
+    <!-- Bottom Left pattern -->
+    <div class="absolute bottom-0 left-0 flex justify-center items-center pointer-events-none w-[150px] lg:w-[200px]">
+      <img src="/assets/bottom-left.svg" alt="about background" class="w-full opacity-20" />
+    </div>
+
+    <div class="absolute inset-0 bg-white/30 pointer-events-none"></div>
 
 
     <div ref="aboutContent"
