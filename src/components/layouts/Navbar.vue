@@ -50,8 +50,8 @@
                 <!-- Footer Content -->
                 <div class="flex flex-col justify-between gap-3 sm:gap-4 w-full pointer-events-auto mt-10">
                     <address class="not-italic text-white space-y-1 text-sm sm:text-base font-light">
-                        <p><span class="font-semibold">Phone:</span> <a href="tel:+2348022475918"
-                                class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300">+2348022475918</a>
+                        <p><span class="font-semibold">Phone:</span> <a href="tel:+2348069970738"
+                                class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300">+2348069970738</a>
                         </p>
                         <p><span class="font-semibold">Email:</span> <a href="mailto:isonguyombiz@gmail.com"
                                 class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300">isonguyombiz@gmail.com</a>
