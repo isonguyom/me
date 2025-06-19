@@ -16,7 +16,7 @@
 
 
     <div ref="aboutContent"
-      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth max-w-4xl mx-auto">
+      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth max-w-4xl mx-auto custom-scrollbar">
       <article class="text-lg md:text-xl lg:text-2xl font-dm leading-relaxed text-pretty space-y-6 text-balance">
         <p class="text-justify">
           I'm <strong>Martin Isonguyo</strong>, a front-end developer with experience in building modern and

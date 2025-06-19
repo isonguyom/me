@@ -28,10 +28,10 @@
           </h3>
           <address class="not-italic text-white space-y-1">
             <p><span class="font-semibold">Phone:</span> <a href="tel:+2348069970738"
-                class="opacity-80 hover:text-accent hover:opacity-100 transition-colors duration-300">+2348069970738</a>
+                class="opacity-80 hover:text-accent hover:opacity-100 transition-colors duration-300 allow-copy">+2348069970738</a>
             </p>
             <p><span class="font-semibold">Email:</span> <a href="mailto:isonguyombiz@gmail.com"
-                class="opacity-80 hover:text-accent hover:opacity-100 transition-colors duration-300">isonguyombiz@gmail.com</a>
+                class="opacity-80 hover:text-accent hover:opacity-100 transition-colors duration-300 allow-copy">isonguyombiz@gmail.com</a>
             </p>
           </address>
         </div>

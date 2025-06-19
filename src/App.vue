@@ -369,6 +369,43 @@ onMounted(() => {
   document.addEventListener('touchmove', handleTouchMove, { passive: false })
   document.addEventListener('touchend', handleTouchEnd)
   document.addEventListener('keydown', handleKeyDown)
+
+  // Prevent right-click unless it's on allowed elements
+  document.addEventListener('contextmenu', (e) => {
+    const target = e.target
+    if (target.closest('input, textarea, .allow-copy')) return
+    e.preventDefault()
+  })
+
+  // Prevent copying except in allowed elements
+  document.addEventListener('keydown', (e) => {
+    const target = e.target
+    const isAllowed = target.closest('input, textarea, .allow-copy')
+
+    if (!isAllowed) {
+      if (
+        (e.ctrlKey && ['c', 'u', 's'].includes(e.key.toLowerCase())) ||
+        (e.ctrlKey && e.shiftKey && ['i', 'j'].includes(e.key.toLowerCase())) ||
+        e.key === 'F12'
+      ) {
+        e.preventDefault()
+      }
+    }
+  })
+
+  // Prevent zoom (Ctrl + scroll)
+  window.addEventListener(
+    'wheel',
+    (e) => {
+      if (e.ctrlKey) e.preventDefault()
+    },
+    { passive: false }
+  )
+
+  // Prevent pinch zoom on Safari
+  window.addEventListener('gesturestart', (e) => {
+    e.preventDefault()
+  })
 })
 
 
