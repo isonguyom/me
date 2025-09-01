@@ -7,14 +7,6 @@ export const useProjectsStore = defineStore("projects", () => {
   const projects = ref([
     {
       id: id++,
-      title: "Vivstock",
-      image: "assets/vivstock.gif",
-      link: "https://vivstock.com",
-      tags: ['Auth pages', 'Dashboard'],
-      description: "A stock trading platform that allows users to buy and sell stocks. Responsible for building the auth pages and dashboard(user and admin) frontend",
-    },
-    {
-      id: id++,
       title: "DCOIN Exchange",
       image: "assets/dcoin.png",
       link: "https://dcoinexchange.com",
