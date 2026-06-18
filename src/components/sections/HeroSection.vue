@@ -21,7 +21,7 @@
       </h1>
       <p class="md:text-xl lg:text-2xl mb-6 max-w-xl lg:max-w-3xl">
         A proficient
-        <span class="font-semibold capitalize">Frontend Developer</span> building
+        <span class="font-semibold capitalize">Frontend Engineer</span> building
         modern, responsive web applications and crafting efficient digital
         solutions for the maritime industry.
       </p>
