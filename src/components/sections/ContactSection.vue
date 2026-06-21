@@ -185,8 +185,7 @@ async function handleSubmit() {
 
     toastRef.value.addToast({ message: "Message sent successfully!", type: "success" });
     form.value = { name: "", email: "", message: "" };
-  } catch (error) {
-    console.error("EmailJS Error:", error);
+  } catch {
     toastRef.value.addToast({ message: "Something went wrong. Please try again.", type: "error" });
   } finally {
     isSending.value = false;
