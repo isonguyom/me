@@ -15,4 +15,20 @@ export default defineConfig([
   pluginVue.configs["flat/essential"],
   { files: ["**/*.json"], plugins: { json }, language: "json/json", extends: ["json/recommended"] },
   { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
+  {
+    files: ["**/*.vue"],
+    rules: {
+      "vue/multi-word-component-names": "off",
+    },
+  },
+  {
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      ".vscode/**",
+      "jsconfig.json",
+      "vite.config.js",
+      "eslint.config.js",
+    ],
+  },
 ]);
