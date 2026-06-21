@@ -15,7 +15,7 @@
         <div
           ref="logo"
           :class="[
-            'w-[45px] h-[45px] lg:w-[60px] lg:h-[60px] rounded-full flex justify-center items-center bg-white p-2 lg:p-3 shadow-md',
+            'w-11.25 h-11.25 lg:w-15 lg:h-15 rounded-full flex justify-center items-center bg-white p-2 lg:p-3 shadow-md',
           ]"
         >
           <!-- <span ref="logo" class="logo font-script font-bold text-2xl md:text-3xl underline">M</span> -->
@@ -36,7 +36,7 @@
           ref="menuButton"
           @click="toggleMenu"
           :class="[
-            'menu-burger flex justify-center items-center bg-transparent w-[42px] h-[18px] cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
+            'menu-burger flex justify-center items-center bg-transparent w-10.5 h-4.5 cursor-pointer transition-colors duration-300 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent',
             darkBg ? 'light-burger' : '',
             isMenuOpen ? 'active' : '',
           ]"
@@ -50,7 +50,7 @@
     <!-- Expanding Circle Background -->
     <div
       ref="bgCircle"
-      class="fixed top-0 right-0 w-[100px] h-[100px] max-w-[450px] max-h-screen bg-primary scale-0 z-10 pointer-events-none"
+      class="fixed top-0 right-0 w-25 h-25 max-w-112.5 max-h-screen bg-primary scale-0 z-10 pointer-events-none"
     ></div>
 
     <!-- Accessible Navigation Menu -->
@@ -58,7 +58,7 @@
       v-show="isMenuVisible"
       ref="menu"
       id="menu"
-      class="navbar fixed top-0 right-0 h-screen w-full max-w-[450px] px-4 md:px-6 py-4 text-white flex-col justify-center gap-y-4 z-20"
+      class="navbar fixed top-0 right-0 h-screen w-full max-w-112.5 px-4 md:px-6 py-4 text-white flex-col justify-center gap-y-4 z-20"
       role="navigation"
       aria-labelledby="site-title"
     >
@@ -88,19 +88,19 @@
         <div class="flex flex-col justify-between gap-3 sm:gap-4 w-full pointer-events-auto mt-10">
           <address class="not-italic text-white space-y-1 text-sm sm:text-base font-light">
             <p>
-              <span class="font-semibold">Phone:</span>
+              <span class="font-semibold mr-1">Phone:</span>
               <a
-                href="tel:+2348069970738"
+                href="tel:+2348022475918"
                 class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300 allow-copy"
-                >+2348069970738</a
+                >+2348022475918</a
               >
             </p>
             <p>
-              <span class="font-semibold">Email:</span>
+              <span class="font-semibold mr-1">Email:</span>
               <a
-                href="mailto:isonguyombiz@gmail.com"
+                href="mailto:isonguyom@gmail.com"
                 class="opacity-80 hover:text-secondary hover:opacity-100 transition-colors duration-300 allow-copy"
-                >isonguyombiz@gmail.com</a
+                >isonguyom@gmail.com</a
               >
             </p>
           </address>

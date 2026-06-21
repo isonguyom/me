@@ -8,7 +8,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Easy Access",
-      image: "assets/easy-access.png",
+      image: "projects/easy-access.png",
       link: "https://easyaccess.com.ng",
       tags: ["Vue.js", "Pinia", "Tailwind CSS", "Dashboard"],
       description:
@@ -16,8 +16,22 @@ export const useProjectsStore = defineStore("projects", () => {
     },
     {
       id: id++,
+      title: "Naviscope ETA",
+      image: "projects/naviscope.png",
+      link: "https://naviscope-eta.vercel.app/",
+      tags: [
+        "Next.js",
+        "TypeScript",
+        "TailwindCSS",
+        "Maritime Tech",
+      ],
+      description:
+        "Naviscope ETA is a maritime utility app for calculating vessel estimated time of arrival (ETA), estimating fuel consumption, and optimizing voyage planning for shipping operations.",
+    },
+    {
+      id: id++,
       title: "DCOIN Exchange",
-      image: "assets/dcoin.png",
+      image: "projects/dcoin.png",
       link: "https://dcoinexchange.com",
       tags: ["Vue.js", "Pinia", "Tailwind CSS", "Dashboard"],
       description:
@@ -26,7 +40,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "FlowPay",
-      image: "assets/flowpay.png",
+      image: "projects/flowpay.png",
       link: "https://flowpayapp.vercel.app",
       tags: ["Vue.js", "Tailwind", "Pinia", "Node.js", "Express.js", "MongoDB", "Dashboard"],
       description:
@@ -35,7 +49,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Port Ledger",
-      image: "assets/portledger.png",
+      image: "projects/portledger.png",
       link: "https://port-ledger.vercel.app/dashboard",
       tags: ["Next.js", "Tailwind", "TypeScript", "Dashboard"],
       description:
@@ -44,7 +58,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Borderless",
-      image: "assets/borderless.png",
+      image: "projects/borderless.png",
       link: "https://borderless-peach.vercel.app",
       tags: ["Vue.js", "Dashboard", "JSON Server"],
       description:
@@ -53,7 +67,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Drag & Drop Image gallery",
-      image: "assets/gallery.png",
+      image: "projects/gallery.png",
       link: "https://isonguyom.github.io/drag-and-drop-gallery",
       tags: ["React", "API Integration", "AuthO"],
       description:
@@ -62,15 +76,15 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "Angel's Pastries Services",
-      image: "assets/angel.gif",
+      image: "projects/angel.gif",
       link: "",
-      tags: ["Logo", "Branding", "Graphic Design"],
+      tags: ["Logo", "Branding", "Figma", "Graphic Design"],
       description: "Angel's Pastries Services is a bakery that specializes in cakes and pastries. ",
     },
     {
       id: id++,
       title: "Tiptop Design Agency",
-      image: "assets/tiptop.gif",
+      image: "projects/tiptop.gif",
       link: "https://tiptopdesign.netlify.app",
       tags: ["Website", "HTML/CSS", "Logo", "UI design", "GSAP"],
       description:
@@ -80,7 +94,7 @@ export const useProjectsStore = defineStore("projects", () => {
     {
       id: id++,
       title: "JavaScript Quiz app",
-      image: "assets/quiz-app.png",
+      image: "projects/quiz-app.png",
       link: "https://isonguyom.github.io/quizAppJs",
       tags: ["JavaScript"],
       description:
