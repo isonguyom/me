@@ -31,7 +31,7 @@
             class="lg:flex flex-col lg:text-center text-2xl md:text-3xl lg:text-5xl xl:text-7xl text-secondary font-bold font-heading"
           >
             <span>Reach out.</span> <span>Let’s create</span> <span>something</span>
-            <span>amazing!</span> Test workflow
+            <span>amazing!</span>
           </h3>
           <address class="not-italic text-white space-y-1">
             <p>
