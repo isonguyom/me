@@ -180,7 +180,7 @@ async function handleSubmit() {
         from_email: form.value.email,
         message: form.value.message,
       },
-      import.meta.env.VITE_USER_ID,
+      import.meta.env.VITE_PUBLIC_KEY,
     );
 
     toastRef.value.addToast({ message: "Message sent successfully!", type: "success" });
@@ -227,7 +227,7 @@ onMounted(async () => {
   if (!contactSection.value) return;
 
   gsap.fromTo(
-    contactSection.value.children[0],
+    scrollContainer.value,
     { opacity: 0, y: 50 },
     {
       opacity: 1,
