@@ -1,7 +1,9 @@
 <template>
-  <div ref="heroSection" id="home"
-    class="h-full w-full flex justify-center items-center py-14 relative overflow-hidden bg-secondary text-text">
-
+  <div
+    ref="heroSection"
+    id="home"
+    class="h-full w-full flex justify-center items-center py-14 relative overflow-hidden bg-secondary text-text"
+  >
     <!-- Background image -->
     <div class="absolute inset-0 flex justify-center items-center pointer-events-none opacity-20">
       <img src="/assets/hero-bg.png" alt="projects background" class="w-full h-full object-cover" />
@@ -9,31 +11,30 @@
 
     <div class="absolute inset-0 bg-white/20 pointer-events-none"></div>
 
-
     <!-- Hero content -->
-    <div ref="heroContent"
-      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth">
+    <div
+      ref="heroContent"
+      class="relative z-10 w-full h-auto max-h-full overflow-y-auto px-4 md:px-6 xl:px-10 py-6 scroll-smooth"
+    >
       <h1 class="font-bold uppercase md:text-xl lg:text-2xl">
         Hi, I'm <br />
-        <span ref="splitTextEl" class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
+        <span
+          ref="splitTextEl"
+          class="text-primary text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold"
+        >
           <!-- We'll split and render letters in JS -->
         </span>
       </h1>
       <p class="md:text-xl lg:text-2xl mb-6 max-w-xl lg:max-w-3xl">
         A proficient
-        <span class="font-semibold capitalize">Frontend Engineer</span> building
-        modern, responsive web applications and crafting efficient digital
-        solutions for the maritime industry.
+        <span class="font-semibold capitalize">Frontend Engineer</span> building modern, responsive
+        web applications and crafting efficient digital solutions for the maritime industry.
       </p>
 
       <div class="flex flex-wrap gap-4">
-        <BaseButton variant="primary" @click="handleGoTo(3)">
-          View My Works
-        </BaseButton>
+        <BaseButton variant="primary" @click="handleGoTo(3)"> View My Works </BaseButton>
 
-        <BaseButton variant="outline" @click="handleGoTo(5)">
-          Contact Me
-        </BaseButton>
+        <BaseButton variant="outline" @click="handleGoTo(5)"> Contact Me </BaseButton>
       </div>
     </div>
   </div>
@@ -109,7 +110,7 @@ onMounted(() => {
         autoAlpha: 0,
         duration: 0.8,
       },
-      ">0.2" // start 0.2 seconds after letters finish
+      ">0.2", // start 0.2 seconds after letters finish
     )
 
     // Then animate buttons
@@ -121,7 +122,7 @@ onMounted(() => {
         duration: 0.6,
         stagger: 0.2,
       },
-      ">0.1" // start 0.1 seconds after paragraph animation starts
+      ">0.1", // start 0.1 seconds after paragraph animation starts
     );
 });
 
@@ -140,6 +141,12 @@ onUnmounted(() => {
 /* Gradient mask to fade top and bottom */
 .mask-gradient {
   mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 25%,
+    black 75%,
+    transparent 100%
+  );
 }
 </style>

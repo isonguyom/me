@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Petit+Formal+Script&family=Space+Grotesk:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Petit+Formal+Script&family=Space+Grotesk:wght@300..700&display=swap");
 
 @import "tailwindcss";
 
 @theme {
   --color-primary: #183b4e;
-  --color-secondary: #36A49F;
+  --color-secondary: #36a49f;
   --color-background: #f9f9f6;
   --color-text: #1f1f1f;
   --color-accent: #27548a;
   --color-extra: #f3f3e0;
 
-  --font-text: 'DM Sans', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
-  --font-mono: 'DM Mono', monospace;
-  --font-script: 'Petit Formal Script', cursive;
+  --font-text: "DM Sans", sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-mono: "DM Mono", monospace;
+  --font-script: "Petit Formal Script", cursive;
 }
 
 *,
@@ -51,13 +51,11 @@ body {
   -ms-user-select: none;
 }
 
-
 body,
 html {
   -webkit-touch-callout: none;
   /* Disable iOS long-press callout */
 }
-
 
 h1,
 h2,
@@ -74,7 +72,6 @@ textarea,
   user-select: text !important;
   -webkit-user-select: text !important;
 }
-
 
 .custom-scrollbar {
   scrollbar-width: thin;

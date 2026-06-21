@@ -19,12 +19,7 @@ export const useProjectsStore = defineStore("projects", () => {
       title: "Naviscope ETA",
       image: "projects/naviscope.png",
       link: "https://naviscope-eta.vercel.app/",
-      tags: [
-        "Next.js",
-        "TypeScript",
-        "TailwindCSS",
-        "Maritime Tech",
-      ],
+      tags: ["Next.js", "TypeScript", "TailwindCSS", "Maritime Tech"],
       description:
         "Naviscope ETA is a maritime utility app for calculating vessel estimated time of arrival (ETA), estimating fuel consumption, and optimizing voyage planning for shipping operations.",
     },
